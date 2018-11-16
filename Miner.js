@@ -8,15 +8,14 @@ function Miner(){
     this.receiveTransaction = function(transaction){
 
         this.capturedTransactions.push(transaction);
-        //console.log(this.capturedTransactions);
 
         // Make this logic better.  No need to call so many functions
-    //    if(this.capturedTransactions.length % 2 == 0){
+        if(this.capturedTransactions.length % 2 == 0){
 
             this.verify();
-        //}
+        }
 
-        //this.displayTransaction(transaction);
+        this.displayTransaction(transaction);
 
     }
 
@@ -35,7 +34,7 @@ function Miner(){
     this.pushBlockToBlockchain = function(proof){
 
         // Miner creates block for now, this may change
-        var completedBlock = new Block(this.capturedTransactions);
+        var completedBlock = new Block(this.capturedTransactions.splice(0));
         //this.capturedTransactions = [];
         centBlockchain.push(completedBlock);
         console.log(centBlockchain);
