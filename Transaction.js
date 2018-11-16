@@ -4,6 +4,6 @@ function Transaction(sender, receiver, amount){
     this.a = amount;
 
     this.string = function(){
-        return this.s+':'+this.r+':'+this.a;
+        return this.s+' -> '+this.r+' : '+this.a;
     }
 }

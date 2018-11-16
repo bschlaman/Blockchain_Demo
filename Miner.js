@@ -1,51 +1,64 @@
 function Miner(){
 
     this.capturedTransactions = [];
-    this.trnsContainer =  null;
+    
+	this.trnsContainer = null;
 
 
 
     this.receiveTransaction = function(transaction){
+		
+		// Could be a possible reworking of logic here.  Current logic: if we are on a non-0 multiple of blocksize,
+		// then don't accept message.  Otherwise process the trans. and if afterwards its a multiple of 4 then append
+		// ready message
+		if(this.capturedTransactions.length % blockSize == 0 && this.capturedTransactions.length>0){
+			if(!this.trnsContainer.lastChild.innerHTML.startsWith('C')){
+				this.displayMessageIntrnsContainer('Can\'t accept, full! Push.');
+			}
+		}
+		else{
+			this.capturedTransactions.push(transaction);
+			this.displayTransaction(transaction);
+			if(this.capturedTransactions.length % blockSize == 0){
+				this.displayMessageIntrnsContainer('Ready to Verify and Push');
+			}
+		}
 
-        this.capturedTransactions.push(transaction);
-
-        // Make this logic better.  No need to call so many functions
-        if(this.capturedTransactions.length % blockSize == 0){
-			
-			
-            this.verify();
-        }
-
-        this.displayTransaction(transaction);
+		console.log(this.capturedTransactions.length%blockSize);
 
     }
 
 
     this.verify = function(){
-        console.log('verify invoked');
-		var verified = false;
+        if(this.capturedTransactions.length % blockSize == 0 && this.capturedTransactions.length>0){
+			console.log('verify invoked');
+			var verified = false;
 
-        var proof = 0;
-        verified = true;
+			var proof = 0;
+			verified = true;
 
-        if(verified){
-            this.pushBlockToBlockchain(proof);
-        }
+			if(verified){
+				this.pushTransactionsToBlockchain(proof);
+			}
+		}
     }
 
-    this.pushBlockToBlockchain = function(proof){
+    this.pushTransactionsToBlockchain = function(proof){
 
         // Miner creates block for now, this may change
         var completedBlock = new Block(this.capturedTransactions.slice(0));
 		
 		// Clear out transaction display
-		while(this.trnsContainer.firstChild){
-			this.trnsContainer.removeChild(this.trnsContainer.firstChild);
+		while(this.trnsContainer.childNodes[1]){
+			this.trnsContainer.removeChild(this.trnsContainer.childNodes[1]);
 		}
         
 		// Push to blockchain
 		centBlockchain.push(completedBlock);
         updatecentBlockchain();
+		
+		// Clear captured transactions.  There might be a better way to do this.
+		this.capturedTransactions = [];
 
     }
 
@@ -63,12 +76,14 @@ function Miner(){
     this.displayTransDiv();
 
     this.displayTransaction = function(transaction){
-        var p = document.createElement('p');
+       this.displayMessageIntrnsContainer((this.capturedTransactions.length -1) % blockSize + 1 +'. '+ transaction.string() + '<br>');
+    }
+
+	this.displayMessageIntrnsContainer = function(text){
+		 var p = document.createElement('p');
         p.style.textAlign = "left";
         p.style.margin = "8px";
         this.trnsContainer.appendChild(p);
-        p.innerHTML = (this.capturedTransactions.length % blockSize) +'. '+ transaction.string() + '<br>';
-    }
-
-
+        p.innerHTML = text;
+	}
 }
