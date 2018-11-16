@@ -18,6 +18,7 @@ function Miner(){
 
         //this.displayTransaction(transaction);
 this.pushBlockToBlockchain('proof');
+console.log(this.capturedTransactions);
     }
 
 
@@ -35,11 +36,11 @@ this.pushBlockToBlockchain('proof');
     this.pushBlockToBlockchain = function(proof){
 
         // Miner creates block for now, this may change
-        var completedBlock = new Block(this.capturedTransactions);
+        //var completedBlock = new Block(this.capturedTransactions);
         //this.capturedTransactions = [];
-        centBlockchain.push(completedBlock);
+        centBlockchain.push(new Block(this.capturedTransactions.slice(0)));
         console.log(centBlockchain);
-        updatecentBlockchain();
+        //updatecentBlockchain();
 
     }
 

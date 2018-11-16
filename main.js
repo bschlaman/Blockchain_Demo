@@ -33,9 +33,9 @@ function update(){
 
 function createTransaction(sender, receiver, amount){
     // Just keeping track of transactions
-    p1inner += sender+' sent '+amount+' to '+receiver+'<br>';
+    //p1inner += sender+' sent '+amount+' to '+receiver+'<br>';
     var newT = new Transaction(sender, receiver, amount);
-    allTransactions.push(newT);
+    //allTransactions.push(newT);
 
     // Give transaction to the miner (maybe change later so that miner is listening)
     miner1.receiveTransaction(newT);
