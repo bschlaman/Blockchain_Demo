@@ -13,24 +13,24 @@ function Miner(){
         // Make this logic better.  No need to call so many functions
     //    if(this.capturedTransactions.length % 2 == 0){
 
-            this.verify();
+            //this.verify();
         //}
 
         //this.displayTransaction(transaction);
-
+this.pushBlockToBlockchain('proof');
     }
 
 
-    this.verify = function(){
-        var verified = false;
-
-        var proof = 0;
-        verified = true;
-
-        if(verified){
-            this.pushBlockToBlockchain(proof);
-        }
-    }
+    // this.verify = function(){
+    //     var verified = false;
+    //
+    //     var proof = 0;
+    //     verified = true;
+    //
+    //     if(verified){
+    //         this.pushBlockToBlockchain(proof);
+    //     }
+    // }
 
     this.pushBlockToBlockchain = function(proof){
 
@@ -43,28 +43,28 @@ function Miner(){
 
     }
 
-    this.displayTransDiv = function(){
-        if (!this.trnsContainer){
-            this.trnsContainer = document.createElement('div');
-            var rcvdTrans = document.getElementById('rcvdTrans');
-            rcvdTrans.appendChild(this.trnsContainer);
-            this.trnsContainer.innerHTML = 'Temporary Block';
-            this.trnsContainer.style.textAlign = "center";
-            this.trnsContainer.style.background = 'lightblue';
-            this.trnsContainer.style.width = '200px';
-            this.trnsContainer.style.height = '300px';
-        }
-    }
-
-    this.displayTransDiv();
-
-    this.displayTransaction = function(transaction){
-        var p = document.createElement('p');
-        p.style.textAlign = "left";
-        p.style.margin = "8px";
-        this.trnsContainer.appendChild(p);
-        p.innerHTML = this.capturedTransactions.length +'. '+ transaction.string() + '<br>';
-    }
+    // this.displayTransDiv = function(){
+    //     if (!this.trnsContainer){
+    //         this.trnsContainer = document.createElement('div');
+    //         var rcvdTrans = document.getElementById('rcvdTrans');
+    //         rcvdTrans.appendChild(this.trnsContainer);
+    //         this.trnsContainer.innerHTML = 'Temporary Block';
+    //         this.trnsContainer.style.textAlign = "center";
+    //         this.trnsContainer.style.background = 'lightblue';
+    //         this.trnsContainer.style.width = '200px';
+    //         this.trnsContainer.style.height = '300px';
+    //     }
+    // }
+    //
+    // this.displayTransDiv();
+    //
+    // this.displayTransaction = function(transaction){
+    //     var p = document.createElement('p');
+    //     p.style.textAlign = "left";
+    //     p.style.margin = "8px";
+    //     this.trnsContainer.appendChild(p);
+    //     p.innerHTML = this.capturedTransactions.length +'. '+ transaction.string() + '<br>';
+    // }
 
 
 }

@@ -1,7 +1,3 @@
-console.log('asdf');
-
-
-
 
 window.onload=function(){
 
@@ -45,31 +41,31 @@ function createTransaction(sender, receiver, amount){
     miner1.receiveTransaction(newT);
 }
 
-function updatecentBlockchain(){
-    var cBlockchainDIV = document.getElementById('cBlockchain');
-
-    // First, clear cBlockchainDIV
-    while(cBlockchainDIV.firstChild){
-        cBlockchainDIV.removeChild(cBlockchainDIV.firstChild);
-    }
-
-    for(var i = 0 ; i < centBlockchain.length ; i++){
-        var blockDIV = document.createElement('div');
-        cBlockchain.appendChild(blockDIV);
-        blockDIV.innerHTML = 'Block ' + i;
-        blockDIV.style.textAlign = "center";
-        blockDIV.style.background = 'lightblue';
-        blockDIV.style.width = '100px';
-        blockDIV.style.height = '200px';
-        blockDIV.style.float = 'left';
-        blockDIV.style.margin = '10px';
-
-        for (var j = 0 ; j < centBlockchain[i].transactions.length ; j++){
-            var p = document.createElement('p');
-            p.style.textAlign = "left";
-            p.style.margin = "8px";
-            blockDIV.appendChild(p);
-            p.innerHTML = j +'. '+ centBlockchain[i].transactions[j].string() + '<br>';
-        }
-    }
-}
+// function updatecentBlockchain(){
+//     var cBlockchainDIV = document.getElementById('cBlockchain');
+//
+//     // First, clear cBlockchainDIV
+//     while(cBlockchainDIV.firstChild){
+//         cBlockchainDIV.removeChild(cBlockchainDIV.firstChild);
+//     }
+//
+//     for(var i = 0 ; i < centBlockchain.length ; i++){
+//         var blockDIV = document.createElement('div');
+//         cBlockchain.appendChild(blockDIV);
+//         blockDIV.innerHTML = 'Block ' + i;
+//         blockDIV.style.textAlign = "center";
+//         blockDIV.style.background = 'lightblue';
+//         blockDIV.style.width = '100px';
+//         blockDIV.style.height = '200px';
+//         blockDIV.style.float = 'left';
+//         blockDIV.style.margin = '10px';
+//
+//         for (var j = 0 ; j < centBlockchain[i].transactions.length ; j++){
+//             var p = document.createElement('p');
+//             p.style.textAlign = "left";
+//             p.style.margin = "8px";
+//             blockDIV.appendChild(p);
+//             p.innerHTML = j +'. '+ centBlockchain[i].transactions[j].string() + '<br>';
+//         }
+//     }
+// }
