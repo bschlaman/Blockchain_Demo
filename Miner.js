@@ -10,8 +10,9 @@ function Miner(){
         this.capturedTransactions.push(transaction);
 
         // Make this logic better.  No need to call so many functions
-        if(this.capturedTransactions.length % 2 == 0){
-
+        if(this.capturedTransactions.length % blockSize == 0){
+			
+			
             this.verify();
         }
 
@@ -21,7 +22,8 @@ function Miner(){
 
 
     this.verify = function(){
-        var verified = false;
+        console.log('verify invoked');
+		var verified = false;
 
         var proof = 0;
         verified = true;
@@ -34,25 +36,28 @@ function Miner(){
     this.pushBlockToBlockchain = function(proof){
 
         // Miner creates block for now, this may change
-        var completedBlock = new Block(this.capturedTransactions.splice(0));
-        //this.capturedTransactions = [];
-        centBlockchain.push(completedBlock);
-        console.log(centBlockchain);
+        var completedBlock = new Block(this.capturedTransactions.slice(0));
+		
+		// Clear out transaction display
+		while(this.trnsContainer.firstChild){
+			this.trnsContainer.removeChild(this.trnsContainer.firstChild);
+		}
+        
+		// Push to blockchain
+		centBlockchain.push(completedBlock);
         updatecentBlockchain();
 
     }
 
     this.displayTransDiv = function(){
-        if (!this.trnsContainer){
-            this.trnsContainer = document.createElement('div');
-            var rcvdTrans = document.getElementById('rcvdTrans');
-            rcvdTrans.appendChild(this.trnsContainer);
-            this.trnsContainer.innerHTML = 'Temporary Block';
-            this.trnsContainer.style.textAlign = "center";
-            this.trnsContainer.style.background = 'lightblue';
-            this.trnsContainer.style.width = '200px';
-            this.trnsContainer.style.height = '300px';
-        }
+		this.trnsContainer = document.createElement('div');
+		var rcvdTrans = document.getElementById('rcvdTrans');
+		rcvdTrans.insertBefore(this.trnsContainer, rcvdTrans.childNodes[0]);
+		this.trnsContainer.innerHTML = 'Temporary Block';
+		this.trnsContainer.style.textAlign = "center";
+		this.trnsContainer.style.background = 'lightblue';
+		this.trnsContainer.style.width = '200px';
+		this.trnsContainer.style.height = '300px';
     }
 
     this.displayTransDiv();
@@ -62,7 +67,7 @@ function Miner(){
         p.style.textAlign = "left";
         p.style.margin = "8px";
         this.trnsContainer.appendChild(p);
-        p.innerHTML = this.capturedTransactions.length +'. '+ transaction.string() + '<br>';
+        p.innerHTML = (this.capturedTransactions.length % blockSize) +'. '+ transaction.string() + '<br>';
     }
 
 

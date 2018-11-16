@@ -11,6 +11,7 @@ window.onload=function(){
     centBlockchain = [];
     allTransactions = [];
     miners = [];
+	blockSize = 4;
 
     // Create initial Miner
     miner1 = new Miner();
@@ -69,7 +70,7 @@ function updatecentBlockchain(){
             p.style.textAlign = "left";
             p.style.margin = "8px";
             blockDIV.appendChild(p);
-            p.innerHTML = j +'. '+ centBlockchain[i].transactions[j].string() + '<br>';
+            p.innerHTML = (j + 1) +'. '+ centBlockchain[i].transactions[j].string() + '<br>';
         }
     }
 }

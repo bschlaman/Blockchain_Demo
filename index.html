@@ -15,6 +15,7 @@
                 width: 500px;
                 height: 300px;
                 float: left;
+				overflow: hidden;
             }
             #rcvdTrans{
                 position: relative;
@@ -32,7 +33,7 @@
         <!--<canvas id='gc' width='400'height='300'></canvas>-->
 
         <div id='cBlockchain'></div>
-        <div id='rcvdTrans'></div><br/>
+        <div id='rcvdTrans'><button onclick="miners[0].verify()"> Verify and Push to Blockchain</button></div><br/>
 
         <div>
             <!--<button onclick='createTransaction()'>Create Transaction</button>-->
