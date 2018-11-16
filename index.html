@@ -4,14 +4,45 @@
         <meta charset="UTF-8">
         <title>BC Visualizer</title>
         <script src="main.js" type="text/javascript"></script>
-        <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+        <script src="Miner.js" type="text/javascript"></script>
+        <script src="Block.js" type="text/javascript"></script>
+        <script src="Transaction.js" type="text/javascript"></script>
+        <style>
+            body {padding: 0; margin: 0;}
+            canvas {vertical-align: top;}
+            #cBlockchain{
+                background-color: black;
+                width: 500px;
+                height: 300px;
+                float: left;
+            }
+            #rcvdTrans{
+                position: relative;
+                left: 10px;
+                overflow: hidden;
+            }
+        </style>
     </head>
 
 
 
     <body>
-        <h1>Welcome to a simple Blockchain Visualizer</h1><br/>
+        <h1>Welcome to a simple Blockchain Visualizer</h1>
         <h2>Coded by Brendan Schlaman</h2>
-        <canvas id='gc' width='800'height='600'></canvas>
+        <!--<canvas id='gc' width='400'height='300'></canvas>-->
+
+        <div id='cBlockchain'></div>
+        <div id='rcvdTrans'></div><br/>
+
+        <div>
+            <!--<button onclick='createTransaction()'>Create Transaction</button>-->
+            <form>
+                From: <input type="text" name="sender" placeholder="Sender">
+                To: <input type="text" name="receiver" placeholder="Receiver">
+                Amount: <input type="text" name="amount" placeholder="Amount $$$"><br>
+            <input type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value)'>
+            </form>
+        </div>
+        <p id='p1'>Transaction History<br></p>
     </body>
 </html>
