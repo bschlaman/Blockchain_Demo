@@ -1,0 +1,9 @@
+1) String gets converted to array of ascii table byte values
+2) Int array made of size x.
+	0 <= str <= 55      x = 16 size: 56
+	56 <= str <= 119    x = 32 size: 64
+	120 <= str <= 183   x = 48 size: 64
+	184 <= str <= 247   x = 64 size: 64
+`	248 <= str <= 311   x = 80 size: 64
+0-55 has size 56, all rest have 64
+
