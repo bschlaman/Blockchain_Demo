@@ -15,3 +15,9 @@
 
 This should be thought of as (((i + 9 - 1) >> 6) + 1) * 16
 because 9 bytes are added to the message to make it 64 bytes in length total.  1 is subtracted from i because 64 is the 65th element in binary, so an extra diget is required, which will show up on (i >> 6) + 1.  64 items (bytes) can fit into our bucket of size 64.  In binary, the number 64 cannot fit into a bucket of size 64, as the number 64 is the 65th number that can be expressed in binary.
+
+
+The following for loop simply concatenates all 4 characters (4 bytes) to a long 32 bit string, and places it into block[0], then repeats for all blocks, until messsage is gone.
+
+
+i is incremented one more time, and 0x80 is appended.  Then the length is simply added at the end.  It looks like this java program only takes lengths of up to 32 bits, since only the last block (4 bytes each) is changed.  TODO: view the blks[] before and after values are updated.
