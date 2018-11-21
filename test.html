@@ -1,0 +1,21 @@
+<html>
+    <head>
+
+        </head>
+        <body>
+            <form>
+                <table border=1>
+                    <tr>
+                        <td>From: </td><td><input type="text" name="sender" placeholder="Sender"></td>
+                    </tr>
+                    <tr>
+                        <td>To: </td><td><input type="text" name="receiver" placeholder="Receiver"></td>
+                    </tr>
+                    <tr>
+                        <td>Amount: </td><td><input type="text" name="amount" placeholder="Amount $$$"></td>
+                    </tr>
+                </table>
+                <input type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value)'>
+            </form>    
+        </body>
+</html>

@@ -7,7 +7,6 @@ window.onload=function(){
 
     // Declare global vaiables
     p1=document.getElementById("p1");
-    p1inner = '';
     centBlockchain = [];
     allTransactions = [];
     miners = [];
@@ -22,13 +21,12 @@ window.onload=function(){
     // ctx=canv.getContext("2d");
 
     // Update refresh rate
-    setInterval(update,1000/30);
+    //setInterval(update,1000/30);
 }
 
 function update(){
     //ctx.fillStyle="black";
     //ctx.fillRect(0,0,canv.width,canv.height);
-    p1.innerHTML = p1inner;
 
     // for(var i = 0 ; i < miners.length ; i++){
     //     miners[i].showTempBlock();
@@ -37,8 +35,14 @@ function update(){
 
 
 function createTransaction(sender, receiver, amount){
+    // If I just want to make a bunch of transactions, this makes it easier
+    if(sender==receiver==amount==''){
+        genRandomTrans();
+        return;
+    }
+
     // Just keeping track of transactions
-    p1inner += sender+' sent '+amount+' to '+receiver+'<br>';
+    p1.innerHTML += sender+' sent '+amount+' to '+receiver+'<br>';
     var newT = new Transaction(sender, receiver, amount);
     allTransactions.push(newT);
 
@@ -73,4 +77,22 @@ function updatecentBlockchain(){
             p.innerHTML = (j + 1) +'. '+ centBlockchain[i].transactions[j].string() + '<br>';
         }
     }
+}
+
+function genRandomTrans(){
+    var name1 = '';
+    var name2 = '';
+    //var namesData = JSON.parse(window.names);
+    var amtx = Math.random();
+
+    name1 += String.fromCharCode(Math.floor(Math.random() * 26)+65)+
+            String.fromCharCode(Math.floor(Math.random() * 26)+97)+
+            String.fromCharCode(Math.floor(Math.random() * 26)+97)+
+            String.fromCharCode(Math.floor(Math.random() * 26)+97);
+    name2 += String.fromCharCode(Math.floor(Math.random() * 26)+65)+
+            String.fromCharCode(Math.floor(Math.random() * 26)+97)+
+            String.fromCharCode(Math.floor(Math.random() * 26)+97)+
+            String.fromCharCode(Math.floor(Math.random() * 26)+97);
+
+    createTransaction(name1, name2, amtx);
 }
