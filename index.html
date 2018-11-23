@@ -28,7 +28,16 @@
             #wrapper{
             }
             #formCont {float: left;}
-            #p1 {margin: 0; position: relative; left: 10px; overflow: hidden;}
+            .phist {margin: 0;}
+            #p1 {position: relative; padding-left: 5px;}
+            #pdiv {
+                position: relative;
+                left: 10px;
+                height: 150px;
+                width: 200px;
+                overflow: auto;
+                background-color: lightgreen;
+            }
         </style>
     </head>
 
@@ -61,7 +70,7 @@
                     <input type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value)'>
                 </form>
             </div>
-            <p id='p1'><strong>Transaction History</strong><br></p>
+            <div id='pdiv'><p class='phist' style="text-align: center;"><strong>Transaction History</strong></p><p class='phist' id='p1'></p></div>
         </div>
     </body>
 </html>

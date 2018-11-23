@@ -36,7 +36,7 @@ function update(){
 
 function createTransaction(sender, receiver, amount){
     // If I just want to make a bunch of transactions, this makes it easier
-    if(sender==receiver==amount==''){
+    if(sender==''&&receiver==''&&amount==''){
         genRandomTrans();
         return;
     }
@@ -83,7 +83,7 @@ function genRandomTrans(){
     var name1 = '';
     var name2 = '';
     //var namesData = JSON.parse(window.names);
-    var amtx = Math.random();
+    var amtx = Math.floor(Math.random() * 1000);
 
     name1 += String.fromCharCode(Math.floor(Math.random() * 26)+65)+
             String.fromCharCode(Math.floor(Math.random() * 26)+97)+
