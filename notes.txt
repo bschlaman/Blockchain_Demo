@@ -45,6 +45,9 @@ https://math.stackexchange.com/questions/1348365/expected-number-of-drawings-to-
 https://en.wikipedia.org/wiki/Birthday_attack
 https://en.wikipedia.org/wiki/Collision_attack
 
+https://en.wikipedia.org/wiki/Expected_value
+https://math.stackexchange.com/questions/846101/expected-value-equals-sum-of-probabilities
+https://math.stackexchange.com/questions/843845/find-the-mean-for-non-negative-integer-valued-random-variable
 
 
 
