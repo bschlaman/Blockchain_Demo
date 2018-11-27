@@ -50,4 +50,8 @@ https://math.stackexchange.com/questions/846101/expected-value-equals-sum-of-pro
 https://math.stackexchange.com/questions/843845/find-the-mean-for-non-negative-integer-valued-random-variable
 
 
+The collision attack website should provide a description of what can be done with a prefix-collision.
+
+
+http://mathworld.wolfram.com/Erf.html <- all i have left to do is explain the integration by parts here on line 13!!!!
 
