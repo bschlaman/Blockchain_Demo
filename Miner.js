@@ -17,7 +17,10 @@ function Miner(){
 			}
 		}
 		else{
+			// Log transaction in this.capturedTransactions
 			this.capturedTransactions.push(transaction);
+
+			// Display the transaction inside the this.trnsContainer div
 			this.displayTransaction(transaction);
 			if(this.capturedTransactions.length % blockSize == 0){
 				this.displayMessageIntrnsContainer('Ready to Verify and Push\nadfa483409f394');
@@ -61,18 +64,31 @@ function Miner(){
 	}
 
 	this.displayTransDiv = function(){
+		// This is the div for the Miner's hub of info
+		var minerHUD = document.getElementById('minerHUD');
+
+		// "Temporary Block" div that will store recieved transactions
 		this.trnsContainer = document.createElement('div');
-		var rcvdTrans = document.getElementById('rcvdTrans');
-		rcvdTrans.insertBefore(this.trnsContainer, rcvdTrans.childNodes[0]);
+		minerHUD.insertBefore(this.trnsContainer, minerHUD.childNodes[0]);
 		this.trnsContainer.innerHTML = 'Temporary Block';
 		this.trnsContainer.style.textAlign = "center";
 		this.trnsContainer.style.background = 'lightblue';
-		this.trnsContainer.style.width = '200px';
-		this.trnsContainer.style.height = '300px';
+		this.trnsContainer.style.width = '250px';
+		this.trnsContainer.style.height = '225px';
+
+		// Verify and Push button, lots of fancy css in styles.css
+		this.verifyButton = document.createElement('button');
+		minerHUD.appendChild(this.verifyButton);
+		this.verifyButton.innerHTML = 'Verify and Push to Blockchain';
+		this.verifyButton.onclick = function(){eval('miners[0].verify();')};
+		this.verifyButton.style.width = this.trnsContainer.style.width;
+
 	}
 
 	this.displayTransDiv();
 
+
+	// Can I combine this into a single function? Is there a utility of keeping separate?
 	this.displayTransaction = function(transaction){
 		this.displayMessageIntrnsContainer((this.capturedTransactions.length -1) % blockSize + 1 +'. '+ transaction.string() + '<br>');
 	}
