@@ -11,10 +11,10 @@ window.onload=function(){
     allTransactions = [];
     miners = [];
 	blockSize = 4;
+    names = ["Brendan","Jason","Lauren","Kirsten","Mike","Bailey","Christa","Mark","Ralph","Judy","Julie","Bob","Alice","Charlie"];
 
     // Create initial Miner
-    miner1 = new Miner();
-    miners.push(miner1);
+    miners.push(new Miner());
 
     // Canvas setup
     // canv=document.getElementById("gc");
@@ -47,7 +47,7 @@ function createTransaction(sender, receiver, amount){
     allTransactions.push(newT);
 
     // Give transaction to the miner (maybe change later so that miner is listening)
-    miner1.receiveTransaction(newT);
+    miners[0].receiveTransaction(newT);
 }
 
 function updatecentBlockchain(){
@@ -64,10 +64,10 @@ function updatecentBlockchain(){
         blockDIV.innerHTML = 'Block ' + i;
         blockDIV.style.textAlign = "center";
         blockDIV.style.background = 'lightblue';
-        blockDIV.style.width = '100px';
-        blockDIV.style.height = '200px';
+        blockDIV.style.width = '200px';
+        blockDIV.style.height = centBlockchain.height;
         blockDIV.style.float = 'left';
-        blockDIV.style.margin = '10px';
+        blockDIV.style.margin = '30px';
 
         for (var j = 0 ; j < centBlockchain[i].transactions.length ; j++){
             var p = document.createElement('p');
@@ -80,19 +80,18 @@ function updatecentBlockchain(){
 }
 
 function genRandomTrans(){
-    var name1 = '';
-    var name2 = '';
-    //var namesData = JSON.parse(window.names);
-    var amtx = Math.floor(Math.random() * 1000);
+    var name1 = names[Math.floor(Math.random() * names.length)];
+    var name2 = names[Math.floor(Math.random() * names.length)];
+    if(name1==name2){genRandomTrans(); return;};
+    var amt = Math.floor(Math.random() * 1000);
 
-    name1 += String.fromCharCode(Math.floor(Math.random() * 26)+65)+
-            String.fromCharCode(Math.floor(Math.random() * 26)+97)+
-            String.fromCharCode(Math.floor(Math.random() * 26)+97)+
-            String.fromCharCode(Math.floor(Math.random() * 26)+97);
-    name2 += String.fromCharCode(Math.floor(Math.random() * 26)+65)+
-            String.fromCharCode(Math.floor(Math.random() * 26)+97)+
-            String.fromCharCode(Math.floor(Math.random() * 26)+97)+
-            String.fromCharCode(Math.floor(Math.random() * 26)+97);
+    // name1 += String.fromCharCode(Math.floor(Math.random() * 26)+65);
+    // name2 += String.fromCharCode(Math.floor(Math.random() * 26)+65);
+    // for(var x = 0 ; x < 3 ; x++){
+    //     name1 += String.fromCharCode(Math.floor(Math.random() * 26)+97);
+    //     name2 += String.fromCharCode(Math.floor(Math.random() * 26)+97);
+    // }
 
-    createTransaction(name1, name2, amtx);
+
+    createTransaction(name1, name2, amt);
 }
