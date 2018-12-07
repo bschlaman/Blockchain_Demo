@@ -1,21 +1,60 @@
 <html>
     <head>
-
-        </head>
-        <body>
-            <form>
-                <table border=1>
-                    <tr>
-                        <td>From: </td><td><input type="text" name="sender" placeholder="Sender"></td>
-                    </tr>
-                    <tr>
-                        <td>To: </td><td><input type="text" name="receiver" placeholder="Receiver"></td>
-                    </tr>
-                    <tr>
-                        <td>Amount: </td><td><input type="text" name="amount" placeholder="Amount $$$"></td>
-                    </tr>
-                </table>
-                <input type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value)'>
-            </form>    
-        </body>
+		<script>
+			window.onload = function(){setInterval(colorchg,1000/5);}
+			inside = false;
+			function showDiv(e){
+				inside = true;
+			}
+			function hideDiv(e){
+				inside = false;
+			}
+			function colorchg(){
+				if(inside){
+					r = Math.floor(Math.random()*255);
+					g = Math.floor(Math.random()*255);
+					b = Math.floor(Math.random()*255);
+					document.getElementById('dat').innerHTML = r +' '+ g +' '+ b;
+					document.getElementById('b1').style.backgroundColor=
+						'rgb(' +r+ ',' +g+ ',' +g+ ')';
+				}
+			}
+		</script>
+		<style>
+			#testdiv1 {
+				border: 3px solid red;			
+			}
+			#testdiv2 {
+				border: 3px solid blue;
+				height: 400px;
+			}
+			.block, span {
+				margin: 5px;
+				background-color: #8000ff;
+				width: 100px;
+				height: 100px;
+			}
+			p {
+				margin: 0;
+				text-align: center;
+			}
+			
+		</style>
+    </head>
+	<body>
+		<div id = 'testdiv1'>
+			<a title="Hit this!">a link</a>
+		</div>
+		<div id = 'testdiv2'>
+			<div id='b1' class='block' onmouseenter='showDiv(event);' onmouseleave='hideDiv(event)'><p>Block 1</p><p id='dat'>Data</p></div>
+			<div id='b2' class='block' onmouseenter='showDiv(event);' onmouseleave='hideDiv(event)'><p>Block 2</p><p>Data</p></div>
+			<!--span class='block'><p>Block 1</p><p>Data</p></span>
+			<span class='block'><p>Block 1</p><p>Data</p></span>
+			<span class='block'><p>Block 1</p><p>Data</p></span-->
+		</div>
+		<div id = 'testdiv3'></div>
+		<div id = 'testdiv4'></div>
+		<div id = 'testdiv5'></div>
+		
+    </body>
 </html>

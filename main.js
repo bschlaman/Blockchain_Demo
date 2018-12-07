@@ -36,10 +36,15 @@ function update(){
 
 function createTransaction(sender, receiver, amount){
     // If I just want to make a bunch of transactions, this makes it easier
-    if(sender==''&&receiver==''&&amount==''){
+    if(sender==null&&receiver==null&&amount==null){
         genRandomTrans();
         return;
     }
+	
+	if(sender==''||receiver==''||amount==''){
+		alert('Fill in all information to create transaction');
+		return;
+	}
 
     // Just keeping track of transactions
     p1.innerHTML += sender+' sent '+amount+' to '+receiver+'<br>';

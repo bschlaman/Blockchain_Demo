@@ -32,7 +32,7 @@
                 font-family: "Ariel", sans-serif;
             }
             #formCont {float: left;}
-            .phist {margin: 0;}
+            .pHist {margin: 0;}
             #p1 {position: relative; padding-left: 5px;}
             #THdiv {
                 position: relative;
@@ -59,7 +59,7 @@
 
             <div id='formCont'>
                 <!--<button onclick='createTransaction()'>Create Transaction</button>-->
-                <form>
+                <form id = 'transForm'>
                     <table border=1>
                         <tr>
                             <td>From: </td><td><input type="text" name="sender" placeholder="Sender"></td>
@@ -71,10 +71,11 @@
                             <td>Amount: </td><td><input type="text" name="amount" placeholder="Amount $$$"></td>
                         </tr>
                     </table>
-                    <input type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value)'>
-                </form>
-            </div>
-            <div id='THdiv'><p class='phist' style="text-align: center; padding: 5px;"><strong>Transaction History</strong></p><p class='phist' id='p1'></p></div>
+                    <input type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>
+				</form>
+				<input type="button" value="Random Transaction" onclick='createTransaction(null, null, null);'>
+			</div>
+            <div id='THdiv'><p class='pHist' style="text-align: center; padding: 5px;"><strong>Transaction History</strong></p><p class='pHist' id='p1'></p></div>
         </div>
     </body>
 </html>
