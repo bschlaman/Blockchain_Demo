@@ -1,0 +1,60 @@
+<html>
+    <head>
+		<script src="test2.js" type="text/javascript"></script>
+		<style>
+			#testdiv1 {
+				border: 3px solid red;
+			}
+			#testdiv2 {
+				border: 3px solid blue;
+				height: 400px;
+                overflow: hidden;
+                overflow-y: scroll;
+			}
+			.block{
+				background-color: #22756f;
+                text-align: center;
+                display: inline-block;
+                /*border: 2px solid #c40d35;*/
+                font-size: 20;
+                color: #fff;
+
+			}
+            canvas {
+                background-color: black;
+            }
+			.blockp {
+				margin: 0;
+				text-align: center;
+			}
+            #floatdiv {
+                z-index: 1 ;
+                position: fixed;
+                background-color: #470c3a;
+            }
+
+		</style>
+    </head>
+	<body onresize='reorganizeDivs();'>
+		<div id = 'testdiv1'>
+			<a title="Hit this!">a link</a>
+		</div>
+
+
+		<div id = 'testdiv2'>
+            <canvas height='400' width='500'></canvas>
+		</div>
+        <button id='add' onclick='addDiv(true);'>Add Div L</button>
+        <button id='add' onclick='addDiv(false);'>Add Div R</button>
+        <button id='tst' onclick='manyDivs(23);'>Add Many Divs</button>
+        <button id='reorg' onclick='reorganizeDivs();'>Reorganize Divs</button>
+
+
+		<div id = 'testdiv3'>
+            <p>Log</p><p id='log'></p>
+        </div>
+		<div id = 'testdiv4'></div>
+		<div id = 'testdiv5'></div>
+
+    </body>
+</html>
