@@ -5,13 +5,30 @@
 			inside = false;
 			function showDiv(e){
 				inside = true;
+                floatdiv = document.createElement('div');
+                floatdiv.id = 'floatdiv';
+                floatdiv.className = 'block';
+                floatdiv.innerHTML = floatdiv.style.top;
+                document.getElementById('testdiv2').appendChild(floatdiv);
 			}
 			function hideDiv(e){
 				inside = false;
+                document.getElementById('testdiv2').removeChild(document.getElementById('floatdiv'));
 			}
+            function updatecoord(e){
+                var fd = document.getElementById('floatdiv');
+                if(fd){
+                    fd.style.left = e.clientX + 10;
+                    fd.style.top = e.clientY - 10;
+                    document.getElementById('log').innerHTML = '\n\n\nMpos: ' + e.clientX;
+                    document.getElementById('log').innerHTML += '  divpos: ' + fd.style.left;
+                    document.getElementById('log').innerHTML += '\nMpos: ' + e.clientY;
+                    document.getElementById('log').innerHTML += '  divpos: ' + fd.style.top;
+                }
+            }
 			function colorchg(){
 				if(inside){
-					r = Math.floor(Math.random()*255);
+                    r = Math.floor(Math.random()*255);
 					g = Math.floor(Math.random()*255);
 					b = Math.floor(Math.random()*255);
 					document.getElementById('dat').innerHTML = r +' '+ g +' '+ b;
@@ -22,23 +39,28 @@
 		</script>
 		<style>
 			#testdiv1 {
-				border: 3px solid red;			
+				border: 3px solid red;
 			}
 			#testdiv2 {
 				border: 3px solid blue;
 				height: 400px;
 			}
-			.block, span {
+			.block{
 				margin: 5px;
-				background-color: #8000ff;
+				background-color: #a48050;
 				width: 100px;
 				height: 100px;
 			}
-			p {
+			.blockp {
 				margin: 0;
 				text-align: center;
 			}
-			
+            #floatdiv {
+                z-index: 1;
+                position: fixed;
+                background-color: #470c3a;
+            }
+
 		</style>
     </head>
 	<body>
@@ -46,15 +68,17 @@
 			<a title="Hit this!">a link</a>
 		</div>
 		<div id = 'testdiv2'>
-			<div id='b1' class='block' onmouseenter='showDiv(event);' onmouseleave='hideDiv(event)'><p>Block 1</p><p id='dat'>Data</p></div>
-			<div id='b2' class='block' onmouseenter='showDiv(event);' onmouseleave='hideDiv(event)'><p>Block 2</p><p>Data</p></div>
+			<div id='b1' class='block' onmouseenter='showDiv(event);' onmouseleave='hideDiv(event)'><p class='blockp'>Block 1</p><p id='dat' class='blockp'>Data</p></div>
+			<div id='b2' class='block' onmousemove='updatecoord(event)' onmouseenter='showDiv(event);' onmouseleave='hideDiv(event)'><p class='blockp'>Block 2</p><p class='blockp'>Data</p></div>
 			<!--span class='block'><p>Block 1</p><p>Data</p></span>
 			<span class='block'><p>Block 1</p><p>Data</p></span>
 			<span class='block'><p>Block 1</p><p>Data</p></span-->
 		</div>
-		<div id = 'testdiv3'></div>
+		<div id = 'testdiv3'>
+            <p>Log</p><p id='log'></p>
+        </div>
 		<div id = 'testdiv4'></div>
 		<div id = 'testdiv5'></div>
-		
+
     </body>
 </html>

@@ -1,0 +1,74 @@
+<html>
+    <head>
+		<script>
+			window.onload = function(){
+                //setInterval(colorchg,1000/5);
+            }
+
+            blockcount = 0;
+            function addDiv(){
+                blockcount++;
+                div = document.createElement('div');
+                div.className = 'block';
+                div.innerHTML = blockcount;
+                //div.style.display = 'inline-block';
+                document.getElementById('testdiv2').appendChild(div);
+            }
+
+            function first(){
+                console.log(document.getElementById('testdiv2').firstElementChild);
+                //document.getElementById('testdiv2').firstChildNode.innerHTML = 'asdf';
+            }
+
+		</script>
+		<style>
+			#testdiv1 {
+				border: 3px solid red;
+			}
+			#testdiv2 {
+				border: 3px solid blue;
+				height: 400px;
+                overflow: hidden;
+
+			}
+			.block{
+				margin: 5px;
+				background-color: #80a450;
+				width: 100px;
+				height: 100px;
+                text-align: center;
+                display: inline-block;
+			}
+			.blockp {
+				margin: 0;
+				text-align: center;
+			}
+            #floatdiv {
+                z-index: 1;
+                position: fixed;
+                background-color: #470c3a;
+            }
+
+		</style>
+    </head>
+	<body>
+		<div id = 'testdiv1'>
+			<a title="Hit this!">a link</a>
+		</div>
+
+
+		<div id = 'testdiv2'>
+
+		</div>
+        <button id='add' onclick='addDiv();'>Add Div</button>
+        <button id='add' onclick='first();'>Test First Child</button>
+
+
+		<div id = 'testdiv3'>
+            <p>Log</p><p id='log'></p>
+        </div>
+		<div id = 'testdiv4'></div>
+		<div id = 'testdiv5'></div>
+
+    </body>
+</html>
