@@ -5,9 +5,11 @@ window.onload = function(){
     blockwidth = 100;
     totBlockwidth = blockwidth + margins*2;
     blockheight = 100;
+
+    canvasOnload();
 }
 
-blockcount = 0;
+var blockcount = 0;
 function addDiv(float, firtRight, amt){
     blockcount++;
     createBlockDiv(float, firtRight, amt);
@@ -102,3 +104,56 @@ function updatecoord(e){
         fd.style.top = e.clientY - 10;
     }
 }
+
+// Canvas Functions
+function canvasOnload(){
+    canv=document.getElementById('canv');
+    ctx=canv.getContext("2d");
+
+    fitToContainer(canv);
+
+    setInterval(update, 1000/10);
+}
+function fitToContainer(canvas){
+    parentDiv = document.getElementById('testdiv1');
+    canvas.width  = parentDiv.clientWidth;
+    canvas.height = parentDiv.clientHeight;
+}
+
+canvBlocks = [];
+canvBlockWidth = 100;
+canvBlockHeight = 100;
+function addDivCanv(){
+    var pos = getPosition(canvBlocks.length);
+    canvBlocks.push(new CanvasBlock(pos.x, pos.y, canvBlocks.length));
+}
+function reorganizeCanvDivs(){
+    var len = canvBlocks.length;
+    //canvBlocks = [];
+    for(var i = 0 ; i < len ; i++){
+        canvBlocks[i].updatePosition(getPosition(i));
+    }
+}
+
+function update(){
+    fitToContainer(canv);
+    reorganizeCanvDivs();
+    for(var i = 0 ; i < canvBlocks.length ; i++){
+        canvBlocks[i].show();
+    }
+}
+function getPosition(blkNum){
+    canvBlocksPerLine = Math.floor(canv.width/canvBlockWidth);
+    //var x = canvBlocks.length%canvBlocksPerLine * canvBlockWidth;
+    var getWidth = function(num, width, bpl){
+        return (num%bpl)*width + width * (bpl-1-2*(num%bpl)) * (Math.floor(num/bpl)%2);
+    }
+    var w = getWidth(blkNum, canvBlockWidth, canvBlocksPerLine);
+    var h = Math.floor(blkNum/canvBlocksPerLine) * canvBlockHeight;
+    return {x: w, y: h};
+}
+
+// function mathy(x){
+//     //return (x%6)*100 - (2*x-11) * 100 * (Math.floor(x/6)%2);
+//     return (x%6)*100 + 100 * (5-2*(x%6)) * (Math.floor(x/6)%2) ;
+// }
