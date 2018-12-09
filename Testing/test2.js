@@ -107,12 +107,20 @@ function updatecoord(e){
 
 // Canvas Functions
 function canvasOnload(){
-    canv=document.getElementById('canv');
-    ctx=canv.getContext("2d");
+    ctx = document.getElementById('canv').getContext("2d");
+    ctx.canvas.addEventListener('mousemove', function(event){trackmouse(event)});
 
     fitToContainer(canv);
 
     setInterval(update, 1000/10);
+}
+function update(){
+    fitToContainer(canv);
+    reorganizeCanvDivs();
+    for(var i = 0 ; i < canvBlocks.length ; i++){
+        canvBlocks[i].show();
+    }
+    if(popup){popup.show();}
 }
 function fitToContainer(canvas){
     parentDiv = document.getElementById('testdiv1');
@@ -120,9 +128,12 @@ function fitToContainer(canvas){
     canvas.height = parentDiv.clientHeight;
 }
 
+
 canvBlocks = [];
 canvBlockWidth = 100;
 canvBlockHeight = 100;
+canvBlocksPerLine = 0;
+
 function addDivCanv(){
     var pos = getPosition(canvBlocks.length);
     canvBlocks.push(new CanvasBlock(pos.x, pos.y, canvBlocks.length));
@@ -134,16 +145,8 @@ function reorganizeCanvDivs(){
         canvBlocks[i].updatePosition(getPosition(i));
     }
 }
-
-function update(){
-    fitToContainer(canv);
-    reorganizeCanvDivs();
-    for(var i = 0 ; i < canvBlocks.length ; i++){
-        canvBlocks[i].show();
-    }
-}
 function getPosition(blkNum){
-    canvBlocksPerLine = Math.floor(canv.width/canvBlockWidth);
+    canvBlocksPerLine = Math.floor(ctx.canvas.width/canvBlockWidth);
     //var x = canvBlocks.length%canvBlocksPerLine * canvBlockWidth;
     var getWidth = function(num, width, bpl){
         return (num%bpl)*width + width * (bpl-1-2*(num%bpl)) * (Math.floor(num/bpl)%2);
@@ -151,6 +154,35 @@ function getPosition(blkNum){
     var w = getWidth(blkNum, canvBlockWidth, canvBlocksPerLine);
     var h = Math.floor(blkNum/canvBlocksPerLine) * canvBlockHeight;
     return {x: w, y: h};
+}
+currentBlock = null;
+popup = null;
+function trackmouse(event){
+    var mouseX = event.clientX - ctx.canvas.offsetLeft;
+    var mouseY = event.clientY - ctx.canvas.offsetTop;
+    var b = blockfromCoord(mouseX,mouseY);
+    if(canvBlocks[b]){
+        var mouseblock = canvBlocks[b];
+        if(mouseblock != currentBlock){
+            currentBlock = mouseblock;
+            popup = new CanvasPopUp(mouseX,mouseY,b,currentBlock.color);
+        }
+        if(popup){
+            popup.updatePosition({x: mouseX, y: mouseY});
+        }
+    }
+    else{currentBlock = null; popup = null;}
+}
+function blockfromCoord(x,y){
+    var row = Math.floor(y/canvBlockHeight);
+    var col = Math.floor(x/canvBlockWidth);
+    return row%2 == 0 ? (col + row*canvBlocksPerLine):((row+1)*canvBlocksPerLine-1-col);
+}
+
+function manyDivsCanv(x){
+    for (var i = 0 ; i <x ; i++){
+        addDivCanv();
+    }
 }
 
 // function mathy(x){
