@@ -110,12 +110,12 @@ function canvasOnload(){
     ctx = document.getElementById('canv').getContext("2d");
     ctx.canvas.addEventListener('mousemove', function(event){trackmouse(event)});
 
-    fitToContainer(canv);
+    fitToContainer(ctx.canvas);
 
     setInterval(update, 1000/10);
 }
 function update(){
-    fitToContainer(canv);
+    fitToContainer(ctx.canvas);
     reorganizeCanvDivs();
     for(var i = 0 ; i < canvBlocks.length ; i++){
         canvBlocks[i].show();
@@ -132,6 +132,7 @@ function fitToContainer(canvas){
 canvBlocks = [];
 canvBlockWidth = 100;
 canvBlockHeight = 100;
+canvBlockMargin = 10;
 canvBlocksPerLine = 0;
 
 function addDivCanv(){
@@ -176,6 +177,13 @@ function trackmouse(event){
 function blockfromCoord(x,y){
     var row = Math.floor(y/canvBlockHeight);
     var col = Math.floor(x/canvBlockWidth);
+    if(col >= canvBlocksPerLine){return null;}
+    if(!(x > (col*canvBlockWidth+canvBlockMargin) && x < ((col+1)*canvBlockWidth-canvBlockMargin))){
+        return null;
+    }
+    if(!(y > (row*canvBlockHeight+canvBlockMargin) && y < ((row+1)*canvBlockHeight-canvBlockMargin))){
+        return null;
+    }
     return row%2 == 0 ? (col + row*canvBlocksPerLine):((row+1)*canvBlocksPerLine-1-col);
 }
 
