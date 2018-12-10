@@ -1,8 +1,30 @@
 <html>
     <head>
+        <script src="Arrow.js" type="text/javascript"></script>
 		<script>
-			window.onload = function(){setInterval(colorchg,1000/5);}
-			inside = false;
+			window.onload = function(){
+                setInterval(update,1000/5);
+                canvasOnload();
+                a = new Arrow({x: 100, y: 50},{x: 60, y: 100});
+            }
+            // Canvas Functions
+            function canvasOnload(){
+                ctx = document.getElementById('canv').getContext("2d");
+
+                fitToContainer(ctx.canvas);
+            }
+            function update(){
+                fitToContainer(ctx.canvas);
+                a.show();
+                colorchg();
+            }
+            function fitToContainer(canvas){
+                parentDiv = document.getElementById('testdiv1');
+                canvas.width  = parentDiv.clientWidth;
+                canvas.height = parentDiv.clientHeight;
+            }
+
+            inside = false;
 			function showDiv(e){
 				inside = true;
                 floatdiv = document.createElement('div');
@@ -38,8 +60,12 @@
 			}
 		</script>
 		<style>
+            canvas {
+                background-color: black;
+            }
 			#testdiv1 {
 				border: 3px solid red;
+                resize: both;
 			}
 			#testdiv2 {
 				border: 3px solid blue;
@@ -65,7 +91,7 @@
     </head>
 	<body>
 		<div id = 'testdiv1'>
-			<a title="Hit this!">a link</a>
+			<canvas id='canv'></canvas>
 		</div>
 		<div id = 'testdiv2'>
 			<div id='b1' class='block' onmouseenter='showDiv(event);' onmouseleave='hideDiv(event)'><p class='blockp'>Block 1</p><p id='dat' class='blockp'>Data</p></div>
