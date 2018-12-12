@@ -124,20 +124,21 @@ function addDivCanv(){
 
 function reorganizeCanvDivs(){
 
+    canvBlocksPerLine = Math.floor(ctx.canvas.width/canvBlockWidth);
     for(var i = 0 ; i < canvBlocks.length; i++){
         canvBlocks[i].updatePosition(getPosition(i));
     }
 
     // Also update the height of the canvas
+    var div = document.getElementById('cBlockchain');
     var cols = Math.ceil(canvBlocks.length/canvBlocksPerLine);
-    if(cols * canvBlockHeight > document.getElementById('cBlockchain').clientHeight){
+    if(cols * canvBlockHeight > div.clientHeight){
         ctx.canvas.height = cols * canvBlockHeight;
     }
-	else{ctx.canvas.height = parentDiv.clientHeight;}
+	else{ctx.canvas.height = div.clientHeight;}
 }
 
 function getPosition(blkNum){
-    canvBlocksPerLine = Math.floor(ctx.canvas.width/canvBlockWidth);
 	if(canvBlocksPerLine == 0){canvBlocksPerLine=1;}
     //var x = canvBlocks.length%canvBlocksPerLine * canvBlockWidth;
     var getWidth = function(num, width, bpl){
