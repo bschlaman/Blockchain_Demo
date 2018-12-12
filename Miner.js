@@ -73,8 +73,8 @@ function Miner(){
 		this.trnsContainer.innerHTML = 'Temporary Block';
 		this.trnsContainer.style.textAlign = "center";
 		this.trnsContainer.style.background = 'lightblue';
-		this.trnsContainer.style.width = '250px';
-		this.trnsContainer.style.height = '225px';
+		this.trnsContainer.style.width = 250 + 'px';
+		this.trnsContainer.style.height = 300-30+6 + 'px';
 
 		// Verify and Push button, lots of fancy css in styles.css
 		this.verifyButton = document.createElement('button');
@@ -86,6 +86,12 @@ function Miner(){
 	}
 
 	this.displayTransDiv();
+
+	// this.updateTransDiv = function(canvPosX, canvPosY){
+	// 	var td = document.getElementById('minerHUD');
+	// 	td.style.left = canvPosX + 20;
+	// 	td.style.top = canvPosY;
+	// }
 
 
 	// Can I combine this into a single function? Is there a utility of keeping separate?
