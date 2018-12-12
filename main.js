@@ -89,13 +89,14 @@ function canvasOnload(){
 
     fitToContainer(ctx.canvas);
 
-    setInterval(update, 1000/10);
+    setInterval(update, 1000/5);
 }
 function update(){
     fitToContainer(ctx.canvas);
     reorganizeCanvDivs();
     for(var i = 0 ; i < canvBlocks.length ; i++){
         canvBlocks[i].show();
+		canvBlocks[i].showArrow();
     }
     if(popup){popup.show();}
 
@@ -103,8 +104,9 @@ function update(){
 }
 function fitToContainer(canvas){
     parentDiv = document.getElementById('cBlockchain');
-    canvas.width  = parentDiv.clientWidth;
-    canvas.height = parentDiv.clientHeight;
+    ctx.canvas.width  = parentDiv.clientWidth;
+    //ctx.canvas.height = parentDiv.clientHeight;
+	//console.log(canvas.height, parentDiv.clientHeight);
 }
 
 
@@ -121,21 +123,22 @@ function addDivCanv(){
 }
 
 function reorganizeCanvDivs(){
-    var len = canvBlocks.length;
-    for(var i = 0 ; i < len ; i++){
+
+    for(var i = 0 ; i < canvBlocks.length; i++){
         canvBlocks[i].updatePosition(getPosition(i));
     }
 
     // Also update the height of the canvas
     var cols = Math.ceil(canvBlocks.length/canvBlocksPerLine);
-    if(cols * canvBlockHeight > origCanvHeight){
-        console.log()
+    if(cols * canvBlockHeight > document.getElementById('cBlockchain').clientHeight){
         ctx.canvas.height = cols * canvBlockHeight;
     }
+	else{ctx.canvas.height = parentDiv.clientHeight;}
 }
 
 function getPosition(blkNum){
     canvBlocksPerLine = Math.floor(ctx.canvas.width/canvBlockWidth);
+	if(canvBlocksPerLine == 0){canvBlocksPerLine=1;}
     //var x = canvBlocks.length%canvBlocksPerLine * canvBlockWidth;
     var getWidth = function(num, width, bpl){
         return (num%bpl)*width + width * (bpl-1-2*(num%bpl)) * (Math.floor(num/bpl)%2);
@@ -149,7 +152,7 @@ currentBlock = null;
 popup = null;
 function trackmouse(event){
     var mouseX = event.clientX - ctx.canvas.offsetLeft;
-    var mouseY = event.clientY - ctx.canvas.offsetTop + document.getElementById('cBlockchain').scrollTop;
+    var mouseY = event.clientY - ctx.canvas.offsetTop + document.getElementById('cBlockchain').scrollTop + window.scrollY;
     var b = blockfromCoord(mouseX,mouseY);
     if(canvBlocks[b]){
         var mouseblock = canvBlocks[b];
