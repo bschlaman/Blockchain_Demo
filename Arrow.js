@@ -5,7 +5,7 @@ function Arrow(start, end){
         this.start = s;
         this.end = e;
         this.slope = (this.end.y - this.start.y)/(this.end.x - this.start.x);
-        this.math = function(x){return (((1-((x+1)/(Math.abs(x)+1)))*(x-1))*-1+(x+1-Math.abs(x+1)))/2;}
+        this.math = function(x){return (((1-((x+1)/(Math.abs(x)+1)))*(1-x))+(x+1-Math.abs(x+1)))/2;}
         this.angle = Math.atan(this.slope) + Math.PI*this.math((this.end.x-this.start.x));
     }
 
