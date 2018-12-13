@@ -42,6 +42,7 @@ function createTransaction(sender, receiver, amount){
     miners[0].receiveTransaction(newT);
 }
 
+// This function is unused
 function updatecentBlockchain(){
     var cBlockchainDIV = document.getElementById('cBlockchain');
 
@@ -159,7 +160,7 @@ function trackmouse(event){
         var mouseblock = canvBlocks[b];
         if(mouseblock != currentBlock){
             currentBlock = mouseblock;
-            popup = new CanvPopUpData(mouseX,mouseY,b,currentBlock.color);
+            popup = new CanvPopUpData(mouseX, mouseY, b, currentBlock.color);
         }
         if(popup){
             popup.updatePosition({x: mouseX, y: mouseY});

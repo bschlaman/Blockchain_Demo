@@ -56,7 +56,7 @@ function Miner(){
 
 		// Push to blockchain
 		centBlockchain.push(completedBlock);
-		updatecentBlockchain();
+		addDivCanv();
 
 		// Clear captured transactions.  There might be a better way to do this.
 		this.capturedTransactions = [];
