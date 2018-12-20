@@ -39,7 +39,9 @@ function createTransaction(sender, receiver, amount){
     allTransactions.push(newT);
 
     // Give transaction to the miner (maybe change later so that miner is listening)
-    miners[0].receiveTransaction(newT);
+    console.log('asdf');
+	miners[0].receiveTransaction(newT);
+
 }
 
 // This function is unused
@@ -72,13 +74,19 @@ function updatecentBlockchain(){
     }
 }
 
-function genRandomTrans(){
+function genRandomTrans(fromTestButton){
     var name1 = names[Math.floor(Math.random() * names.length)];
     var name2 = names[Math.floor(Math.random() * names.length)];
     if(name1==name2){genRandomTrans(); return;};
     var amt = Math.floor(Math.random() * 1000);
 
-    createTransaction(name1, name2, amt);
+    
+	// This logic helps the test button.  Should just be createTransaction(name1, name2, amt); when done testing
+	if(fromTestButton){
+		p1.innerHTML += name1+' sent '+amt+' to '+name2+'<br>';
+		return new Transaction(name1, name2, amt);
+	}
+	else{createTransaction(name1, name2, amt);}
 }
 
 
@@ -90,7 +98,7 @@ function canvasOnload(){
 
     fitToContainer(ctx.canvas);
 
-    setInterval(update, 1000/5);
+    setInterval(update, 1000/30);
 }
 function update(){
     fitToContainer(ctx.canvas);
@@ -112,14 +120,23 @@ function fitToContainer(canvas){
 
 
 canvBlocks = [];
-canvBlockWidth = 100;
-canvBlockHeight = 100;
+canvBlockWidth = 120;
+canvBlockHeight = 120;
 canvBlockMargin = 20;
 canvBlocksPerLine = 0;
 
-function addDivCanv(){
+function addDivCanv(fromMiner){
     var pos = getPosition(canvBlocks.length);
     canvBlocks.push(new CanvasBlock(pos.x, pos.y, canvBlocks.length));
+	if(!fromMiner){
+		faketrns = []
+		for(var i = 0 ; i < blockSize ; i++){
+			var t = genRandomTrans(true);
+			faketrns.push(t);
+			allTransactions.push(t);
+		}
+		centBlockchain.push(new Block(faketrns));
+	}
     updateScroll();
 }
 
@@ -183,12 +200,14 @@ function blockfromCoord(x,y){
 
 function manyDivsCanv(x){
     for (var i = 0 ; i <x ; i++){
-        addDivCanv();
+        addDivCanv(false);
     }
 }
 
 function clearCanvDivs(){
     canvBlocks = [];
+	centBlockchain = [];
+	allTransactions = [];
 }
 
 function updateScroll(){

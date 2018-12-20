@@ -13,7 +13,7 @@ function Miner(){
 		// ready message
 		if(this.capturedTransactions.length % blockSize == 0 && this.capturedTransactions.length>0){
 			if(!this.trnsContainer.lastChild.innerHTML.startsWith('C')){
-				this.displayMessageIntrnsContainer('Can\'t accept, full! Push.');
+				this.displayMessageIntrnsContainer('Can\'t accept, full! Push.', 'alert');
 			}
 		}
 		else{
@@ -23,7 +23,7 @@ function Miner(){
 			// Display the transaction inside the this.trnsContainer div
 			this.displayTransaction(transaction);
 			if(this.capturedTransactions.length % blockSize == 0){
-				this.displayMessageIntrnsContainer('Ready to Verify and Push\nadfa483409f394');
+				this.displayMessageIntrnsContainer('Ready to Verify and Push\n', 'ready');
 			}
 		}
 
@@ -56,7 +56,7 @@ function Miner(){
 
 		// Push to blockchain
 		centBlockchain.push(completedBlock);
-		addDivCanv();
+		addDivCanv(true);
 
 		// Clear captured transactions.  There might be a better way to do this.
 		this.capturedTransactions = [];
@@ -96,13 +96,21 @@ function Miner(){
 
 	// Can I combine this into a single function? Is there a utility of keeping separate?
 	this.displayTransaction = function(transaction){
-		this.displayMessageIntrnsContainer((this.capturedTransactions.length -1) % blockSize + 1 +'. '+ transaction.string() + '<br>');
+		this.displayMessageIntrnsContainer((this.capturedTransactions.length -1) % blockSize + 1 +'. '+ transaction.string() + '<br>', '');
 	}
 
-	this.displayMessageIntrnsContainer = function(text){
+	this.displayMessageIntrnsContainer = function(text, format){
 		var p = document.createElement('p');
 		p.style.textAlign = "left";
 		p.style.margin = "8px";
+		
+		if(format == 'alert'){
+			p.style.color = 'red';
+		}
+		if(format == 'ready'){
+			p.style.color.fontWeight = 'bold';
+		}
+		
 		this.trnsContainer.appendChild(p);
 		p.innerHTML = text;
 	}
