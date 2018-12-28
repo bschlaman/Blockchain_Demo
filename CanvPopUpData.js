@@ -29,7 +29,7 @@ function CanvPopUpData(posX, posY, num, color){
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         //ctx.fillText('Data for ' + num, this.x+(this.width/2)+this.mouseoffset, this.y+(this.height/2)+this.mouseoffset);
- 
+
 		for(var i = 0 ; i < centBlockchain[num].transactions.length ; i++){
             ctx.fillText(centBlockchain[num].transactions[i].string(), xpos+(this.width/2), ypos+(i*20+20));
         }

@@ -49,14 +49,14 @@ function Miner(){
 		// Miner creates block for now, this may change
 		var completedBlock = new Block(this.capturedTransactions.slice(0));
 
+		// Push to blockchain
+		centBlockchain.push(completedBlock);
+		addDivCanv(true);
+
 		// Clear out transaction display
 		while(this.trnsContainer.childNodes[1]){
 			this.trnsContainer.removeChild(this.trnsContainer.childNodes[1]);
 		}
-
-		// Push to blockchain
-		centBlockchain.push(completedBlock);
-		addDivCanv(true);
 
 		// Clear captured transactions.  There might be a better way to do this.
 		this.capturedTransactions = [];
@@ -103,14 +103,14 @@ function Miner(){
 		var p = document.createElement('p');
 		p.style.textAlign = "left";
 		p.style.margin = "8px";
-		
+
 		if(format == 'alert'){
 			p.style.color = 'red';
 		}
 		if(format == 'ready'){
 			p.style.color.fontWeight = 'bold';
 		}
-		
+
 		this.trnsContainer.appendChild(p);
 		p.innerHTML = text;
 	}

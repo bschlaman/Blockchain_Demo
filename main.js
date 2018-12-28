@@ -77,10 +77,10 @@ function updatecentBlockchain(){
 function genRandomTrans(fromTestButton){
     var name1 = names[Math.floor(Math.random() * names.length)];
     var name2 = names[Math.floor(Math.random() * names.length)];
-    if(name1==name2){genRandomTrans(); return;};
+    while(name1==name2){name2 = names[Math.floor(Math.random() * names.length)];}
     var amt = Math.floor(Math.random() * 1000);
 
-    
+
 	// This logic helps the test button.  Should just be createTransaction(name1, name2, amt); when done testing
 	if(fromTestButton){
 		p1.innerHTML += name1+' sent '+amt+' to '+name2+'<br>';
@@ -98,7 +98,7 @@ function canvasOnload(){
 
     fitToContainer(ctx.canvas);
 
-    setInterval(update, 1000/30);
+    setInterval(update, 1000/10);
 }
 function update(){
     fitToContainer(ctx.canvas);
@@ -125,10 +125,10 @@ canvBlockHeight = 120;
 canvBlockMargin = 20;
 canvBlocksPerLine = 0;
 
-function addDivCanv(fromMiner){
+function addDivCanv(fromTestButton){
     var pos = getPosition(canvBlocks.length);
     canvBlocks.push(new CanvasBlock(pos.x, pos.y, canvBlocks.length));
-	if(!fromMiner){
+	if(fromTestButton){
 		faketrns = []
 		for(var i = 0 ; i < blockSize ; i++){
 			var t = genRandomTrans(true);
@@ -200,7 +200,7 @@ function blockfromCoord(x,y){
 
 function manyDivsCanv(x){
     for (var i = 0 ; i <x ; i++){
-        addDivCanv(false);
+        addDivCanv(true);
     }
 }
 
