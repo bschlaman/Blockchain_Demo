@@ -52,6 +52,9 @@ function Miner(){
 		// Push to blockchain
 		centBlockchain.push(completedBlock);
 		addDivCanv(true);
+		
+		// Updates master ledger.  This should not be the job of the miner, this will change
+		updateLedger();
 
 		// Clear out transaction display
 		while(this.trnsContainer.childNodes[1]){

@@ -12,12 +12,15 @@ window.onload=function(){
     miners = [];
 	blockSize = 4;
     names = ["Brendan","Jason","Lauren","Kirsten","Mike","Bailey","Christa","Mark","Ralph","Judy","Julie","Bob","Alice","Charlie"];
+	startCredits = 1000;
 
     // Create initial Miner
     miners.push(new Miner());
 
     // Configure Canvas
     canvasOnload();
+	
+	tableCreate();
 }
 
 
@@ -88,6 +91,41 @@ function genRandomTrans(fromTestButton){
 	}
 	else{createTransaction(name1, name2, amt);}
 }
+
+function tableCreate() {
+	var tbl = document.getElementById('ledger');
+	var tbdy = document.createElement('tbody');
+	for (var i = 0; i < names.length; i++) {
+		var tr = document.createElement('tr');
+		for (var j = 0; j < 2; j++) {
+			var td = document.createElement('td');
+			j == 0 ? td.appendChild(document.createTextNode(names[i])) : td.appendChild(document.createTextNode(startCredits));
+			//i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+			tr.appendChild(td);
+			
+		}
+		tbdy.appendChild(tr);
+	}
+	tbl.appendChild(tbdy);
+	//wrapDiv.insertBefore(tbl, wrapDiv.childNodes.item('tblref').nextSibling);
+}
+
+function updateLedger(){
+	console.log('updateledger');
+	var tbl = document.getElementById('ledger');
+	var latestTransactions = centBlockchain[centBlockchain.length-1].transactions;
+	for(var i = 0 ; i < latestTransactions.length ; i++){
+		for(var j = 0 ; j < tbl.rows.length ; j++){
+			if(tbl.rows[j].childNodes[0] == latestTransactions[i].sender){
+				tbl.rows[j].childNodes[1] = parseInt(tbl.rows[j].childNodes[1]) - latestTransactions[i].amount;
+			}
+			if(tbl.rows[j].childNodes[0] == latestTransactions[i].receiver){
+				tbl.rows[j].childNodes[1] = parseInt(tbl.rows[j].childNodes[1]) + latestTransactions[i].amount;
+			}
+		}
+	}
+}
+
 
 
 // Canvas Functions
