@@ -19,7 +19,7 @@ window.onload=function(){
 
     // Configure Canvas
     canvasOnload();
-	
+
 	tableCreate();
 }
 
@@ -102,28 +102,50 @@ function tableCreate() {
 			j == 0 ? td.appendChild(document.createTextNode(names[i])) : td.appendChild(document.createTextNode(startCredits));
 			//i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
 			tr.appendChild(td);
-			
+
 		}
 		tbdy.appendChild(tr);
 	}
+    // Create 'Total' row
+    var tr = document.createElement('tr');
+    tr.style.fontWeight = 'bold';
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Total Credits'));
+    tr.appendChild(td);
+    td = document.createElement('td');
+    // TODO: There should be a better way to calculate inital value in case
+    // I want to start with uneven values
+    td.appendChild(document.createTextNode(startCredits*names.length));
+    tr.appendChild(td);
+    tbdy.appendChild(tr);
+
 	tbl.appendChild(tbdy);
 	//wrapDiv.insertBefore(tbl, wrapDiv.childNodes.item('tblref').nextSibling);
 }
 
 function updateLedger(){
-	console.log('updateledger');
+    console.log('updateledger');
 	var tbl = document.getElementById('ledger');
 	var latestTransactions = centBlockchain[centBlockchain.length-1].transactions;
+    console.log(latestTransactions);
 	for(var i = 0 ; i < latestTransactions.length ; i++){
-		for(var j = 0 ; j < tbl.rows.length ; j++){
-			if(tbl.rows[j].childNodes[0] == latestTransactions[i].sender){
-				tbl.rows[j].childNodes[1] = parseInt(tbl.rows[j].childNodes[1]) - latestTransactions[i].amount;
+        // For loop logic should reflect other rows like 'Total' or headder
+		for(var j = 0 ; j < tbl.rows.length - 1 ; j++){
+			if(tbl.rows[j].childNodes[0].innerHTML == latestTransactions[i].s){
+				tbl.rows[j].childNodes[1].innerHTML = parseInt(tbl.rows[j].childNodes[1].innerHTML) - latestTransactions[i].a;
 			}
-			if(tbl.rows[j].childNodes[0] == latestTransactions[i].receiver){
-				tbl.rows[j].childNodes[1] = parseInt(tbl.rows[j].childNodes[1]) + latestTransactions[i].amount;
+			if(tbl.rows[j].childNodes[0].innerHTML == latestTransactions[i].r){
+				tbl.rows[j].childNodes[1].innerHTML = parseInt(tbl.rows[j].childNodes[1].innerHTML) + latestTransactions[i].a;
 			}
 		}
 	}
+    // Update Total row
+    var tot = 0;
+    for(var j = 0 ; j < tbl.rows.length - 1 ; j++){
+        tot += parseInt(tbl.rows[j].childNodes[1].innerHTML);
+    }
+    tbl.rows[tbl.rows.length-1].childNodes[1].innerHTML = tot;
+
 }
 
 
