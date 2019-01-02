@@ -21,6 +21,15 @@ public class codeDump {
         }
         return amt;
     }
+	
+	public static void crap2() {
+    
+		for(int i = 0 ; i < 100 ; i++){
+			int x = (((i + 8) >> 6) + 1) * 16;
+			System.out.println(i+": "+x);
+		}
+    
+	}
 
 
     public static void moreCrap(){
