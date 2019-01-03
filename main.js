@@ -16,11 +16,14 @@ window.onload=function(){
 
     // Create initial Miner
     miners.push(new Miner());
+    setInterval(miners[0].speedHash, 1000/2);
 
     // Configure Canvas
     canvasOnload();
 
 	tableCreate();
+
+    modalCreate();
 }
 
 
@@ -42,7 +45,6 @@ function createTransaction(sender, receiver, amount){
     allTransactions.push(newT);
 
     // Give transaction to the miner (maybe change later so that miner is listening)
-    console.log('asdf');
 	miners[0].receiveTransaction(newT);
 
 }
@@ -124,10 +126,8 @@ function tableCreate() {
 }
 
 function updateLedger(){
-    console.log('updateledger');
 	var tbl = document.getElementById('ledger');
 	var latestTransactions = centBlockchain[centBlockchain.length-1].transactions;
-    console.log(latestTransactions);
 	for(var i = 0 ; i < latestTransactions.length ; i++){
         // For loop logic should reflect other rows like 'Total' or headder
 		for(var j = 0 ; j < tbl.rows.length - 1 ; j++){
@@ -148,6 +148,29 @@ function updateLedger(){
 
 }
 
+function modalCreate(){
+    var modal = document.getElementById('popupVerify');
+    var btn = document.getElementById("myBtn");
+
+    document.getElementById('appendcheck').onclick = function(){eval('miners[0].appendGuessandCheck();')};
+    document.getElementById('runhash').onclick = function(){eval('miners[0].startHash();')};
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
 
 
 // Canvas Functions
@@ -264,10 +287,22 @@ function manyDivsCanv(x){
     }
 }
 
-function clearCanvDivs(){
+function resetAll(){
     canvBlocks = [];
 	centBlockchain = [];
 	allTransactions = [];
+
+    // Reset Transaction History, ledger, form, and Captured Transactions
+    document.getElementById('p1').innerHTML = '';
+    var tableRows = document.getElementById('ledger').rows;
+    for(var i = 0 ; i < tableRows.length-1 ; i++){
+        tableRows[i].childNodes[1].innerHTML = startCredits;
+    }
+    document.getElementById("transForm").reset();
+    while(miners[0].trnsContainer.childNodes[1]){
+        miners[0].trnsContainer.removeChild(miners[0].trnsContainer.childNodes[1]);
+    }
+    miners[0].capturedTransactions = [];
 }
 
 function updateScroll(){

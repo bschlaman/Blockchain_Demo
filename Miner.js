@@ -27,24 +27,85 @@ function Miner(){
 			}
 		}
 
-	}
+	};
 
 
-	this.verify = function(){
+	this.openVerification = function(){
 		if(this.capturedTransactions.length % blockSize == 0 && this.capturedTransactions.length>0){
-			console.log('verify invoked');
-			var verified = false;
 
-			var proof = 0;
-			verified = true;
+			var popup = document.getElementById('popupVerify');
+			popup.style.display = "block";
+			// Make this a better name
+			var modalTrans = document.getElementById('modalTrans');
+			modalTrans.innerHTML = '';
+			this.hashInput = '';
 
-			if(verified){
-				this.pushTransactionsToBlockchain(proof);
+			for(var i = 0 ; i < this.capturedTransactions.length ; i++){
+				modalTrans.innerHTML += this.capturedTransactions[i].string()+'<br>';
 			}
+			modalTrans.innerHTML += 'Appended Hex Guess: ';
+
+			for(var i = 0 ; i < this.capturedTransactions.length ; i++){
+				this.hashInput += this.capturedTransactions[i].string()+'\n';
+			}
+
 		}
+	};
+
+	this.hashOn = false;
+	this.startHash = function(){console.log('start'); this.hashOn = true;};
+
+	// Needs better name
+	this.speedHash = function(){
+		if(this.hashOn){
+			this.appendGuessandCheck();
+			console.log('speed');
+		}
+		//console.log("outsie");
+		console.log(this.hashOn);
+
+	};
+
+	this.hashInput = '';
+	this.appendGuessandCheck = function(){
+		var hexGuess = this.randHex(20);
+		var modalTrans = document.getElementById('modalTrans');
+		if(this.hashInput[this.hashInput.length-1-20] == '!'){
+			this.hashInput = this.hashInput.substring(0, this.hashInput.length-21);
+			modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-20);
+		}
+		this.hashInput += '!' + hexGuess;
+		modalTrans.innerHTML += hexGuess;
+
+		var resP = document.getElementById('result');
+		var result = bHA(this.hashInput);
+		result = result.substring(4, 7);
+		resP.innerHTML = result;
+
+		if(this.verifyHash(result)){
+			this.hashOn = false;
+			this.pushTransactionsToBlockchain();
+		}
+
+	};
+
+	this.verifyHash = function(h){
+		if(h[1] == 'a'){
+			return true;
+		}
+		else{return false;}
+	};
+
+	// This function already exists elsewhere, can I find a way to delete it?
+	this.randHex = function(n){
+		var s = ''
+		for(var i = 0 ; i < n ; i++){
+			s += [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)];
+		}
+		return s;
 	}
 
-	this.pushTransactionsToBlockchain = function(proof){
+	this.pushTransactionsToBlockchain = function(){
 
 		// Miner creates block for now, this may change
 		var completedBlock = new Block(this.capturedTransactions.slice(0));
@@ -64,7 +125,7 @@ function Miner(){
 		// Clear captured transactions.  There might be a better way to do this.
 		this.capturedTransactions = [];
 
-	}
+	};
 
 	this.displayTransDiv = function(){
 		// This is the div for the Miner's hub of info
@@ -73,9 +134,17 @@ function Miner(){
 		// "Temporary Block" div that will store recieved transactions
 		this.trnsContainer = document.createElement('div');
 		minerHUD.insertBefore(this.trnsContainer, minerHUD.childNodes[0]);
-		this.trnsContainer.innerHTML = 'Temporary Block';
-		this.trnsContainer.style.textAlign = "center";
-		this.trnsContainer.style.background = 'lightblue';
+
+		var header = document.createElement('p');
+		header.innerHTML = 'Captured Transactions';
+		header.style.fontWeight = 'bold';
+		header.style.textAlign = "center";
+		this.trnsContainer.appendChild(header);
+
+		this.trnsContainer.style.paddingTop = "5px";
+		this.trnsContainer.style.background = '#e19f9d';
+		this.trnsContainer.style.borderTopLeftRadius = '10px';
+		this.trnsContainer.style.borderTopRightRadius = '10px';
 		this.trnsContainer.style.width = 250 + 'px';
 		this.trnsContainer.style.height = 300-30+6 + 'px';
 
@@ -83,10 +152,10 @@ function Miner(){
 		this.verifyButton = document.createElement('button');
 		minerHUD.appendChild(this.verifyButton);
 		this.verifyButton.innerHTML = 'Verify and Push to Blockchain';
-		this.verifyButton.onclick = function(){eval('miners[0].verify();')};
+		this.verifyButton.onclick = function(){eval('miners[0].openVerification();')};
 		this.verifyButton.style.width = this.trnsContainer.style.width;
 
-	}
+	};
 
 	this.displayTransDiv();
 
@@ -100,7 +169,7 @@ function Miner(){
 	// Can I combine this into a single function? Is there a utility of keeping separate?
 	this.displayTransaction = function(transaction){
 		this.displayMessageIntrnsContainer((this.capturedTransactions.length -1) % blockSize + 1 +'. '+ transaction.string() + '<br>', '');
-	}
+	};
 
 	this.displayMessageIntrnsContainer = function(text, format){
 		var p = document.createElement('p');
@@ -116,5 +185,5 @@ function Miner(){
 
 		this.trnsContainer.appendChild(p);
 		p.innerHTML = text;
-	}
+	};
 }
