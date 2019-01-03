@@ -97,7 +97,7 @@ button:hover:before,button:hover:after{
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #e19f9d;
     color: white;
 }
 
@@ -105,6 +105,6 @@ button:hover:before,button:hover:after{
 
 .modal-footer {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #e19f9d;
     color: white;
 }

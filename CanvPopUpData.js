@@ -24,14 +24,19 @@ function CanvPopUpData(posX, posY, num, color){
 		}
 		ctx.fillRect(xpos, ypos, this.width, this.height);
 
-        ctx.fillStyle = 'rgb('+(this.color.r+100)+', '+(this.color.g+100)+', '+(this.color.b+100)+')';
+        ctx.fillStyle = 'rgb('+(this.color.r+200)+', '+(this.color.g+200)+', '+(this.color.b+200)+')';
         ctx.font = "20px Arial";
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         //ctx.fillText('Data for ' + num, this.x+(this.width/2)+this.mouseoffset, this.y+(this.height/2)+this.mouseoffset);
 
+		if(centBlockchain[num-1]){
+			ctx.fillText('Hash of', xpos+(this.width/2), ypos+(20));
+			ctx.fillText('Previous Block: #' + centBlockchain[num-1].hash, xpos+(this.width/2), ypos+(40));
+		}
+		ctx.fillStyle = 'rgb('+(this.color.r+150)+', '+(this.color.g+150)+', '+(this.color.b+150)+')';
 		for(var i = 0 ; i < centBlockchain[num].transactions.length ; i++){
-            ctx.fillText(centBlockchain[num].transactions[i].string(), xpos+(this.width/2), ypos+(i*20+20));
+            ctx.fillText(centBlockchain[num].transactions[i].string(), xpos+(this.width/2), ypos+((i+3)*20+20));
         }
     }
 

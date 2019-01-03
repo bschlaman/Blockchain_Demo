@@ -33,6 +33,9 @@ function Miner(){
 	this.openVerification = function(){
 		if(this.capturedTransactions.length % blockSize == 0 && this.capturedTransactions.length>0){
 
+			// Eventually, this should be somewhere else so you can close the modal and everything still be there
+			this.verified = false;
+			
 			var popup = document.getElementById('popupVerify');
 			popup.style.display = "block";
 			// Make this a better name
@@ -43,7 +46,21 @@ function Miner(){
 			for(var i = 0 ; i < this.capturedTransactions.length ; i++){
 				modalTrans.innerHTML += this.capturedTransactions[i].string()+'<br>';
 			}
+			modalTrans.innerHTML += '<br>';
+			
+			var prevHash = '#NULL';
+			if(centBlockchain[centBlockchain.length-1]){
+				prevHash = centBlockchain[centBlockchain.length-1].hash;
+			}
+			modalTrans.innerHTML += 'Hash of previous block: ' + prevHash + '<br><br>';
+			this.hashInput += prevHash + '\n';
+			
 			modalTrans.innerHTML += 'Appended Hex Guess: ';
+			
+			document.getElementById('popupfooter').innerHTML = 'Run hash to verify transactions and create block.' + '<br>';
+			document.getElementById('popupfooter').innerHTML += 'Rule: Hash must start with "0".';
+			document.getElementById('resultTitle').innerHTML = 'Resultant Hash: ';
+			document.getElementById('result').innerHTML = '';
 
 			for(var i = 0 ; i < this.capturedTransactions.length ; i++){
 				this.hashInput += this.capturedTransactions[i].string()+'\n';
@@ -53,44 +70,50 @@ function Miner(){
 	};
 
 	this.hashOn = false;
-	this.startHash = function(){console.log('start'); this.hashOn = true;};
+	this.startHash = function(){
+		if(!this.verified){
+			this.hashOn = true;
+		}
+	};
 
 	// Needs better name
 	this.speedHash = function(){
 		if(this.hashOn){
 			this.appendGuessandCheck();
-			console.log('speed');
 		}
-		//console.log("outsie");
-		console.log(this.hashOn);
 
 	};
 
 	this.hashInput = '';
 	this.appendGuessandCheck = function(){
-		var hexGuess = this.randHex(20);
-		var modalTrans = document.getElementById('modalTrans');
-		if(this.hashInput[this.hashInput.length-1-20] == '!'){
-			this.hashInput = this.hashInput.substring(0, this.hashInput.length-21);
-			modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-20);
+		// This is to prevent buttons being clicked after verification
+		if(!this.verified){
+			console.log(this.hashInput);
+			var hexGuess = this.randHex(20);
+			var modalTrans = document.getElementById('modalTrans');
+			if(this.hashInput[this.hashInput.length-1-20] == '!'){
+				this.hashInput = this.hashInput.substring(0, this.hashInput.length-21);
+				modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-20);
+			}
+			this.hashInput += '!' + hexGuess;
+			modalTrans.innerHTML += hexGuess;
+
+			var resP = document.getElementById('result');
+			var result = bHA(this.hashInput);
+			result = result.substring(4, 7);
+			resP.innerHTML = result;
+
+			if(this.verifyHash(result)){
+				this.hashOn = false;
+				document.getElementById('popupfooter').innerHTML = 'Hash Found! Block is pushed to Blockchain.';
+				this.verified = true;
+				this.pushTransactionsToBlockchain(result);
+			}
 		}
-		this.hashInput += '!' + hexGuess;
-		modalTrans.innerHTML += hexGuess;
-
-		var resP = document.getElementById('result');
-		var result = bHA(this.hashInput);
-		result = result.substring(4, 7);
-		resP.innerHTML = result;
-
-		if(this.verifyHash(result)){
-			this.hashOn = false;
-			this.pushTransactionsToBlockchain();
-		}
-
 	};
 
 	this.verifyHash = function(h){
-		if(h[1] == 'a'){
+		if(h[0] == '0'){
 			return true;
 		}
 		else{return false;}
@@ -105,14 +128,14 @@ function Miner(){
 		return s;
 	}
 
-	this.pushTransactionsToBlockchain = function(){
+	this.pushTransactionsToBlockchain = function(hash){
 
 		// Miner creates block for now, this may change
-		var completedBlock = new Block(this.capturedTransactions.slice(0));
+		var completedBlock = new Block(this.capturedTransactions.slice(0), hash);
 
 		// Push to blockchain
 		centBlockchain.push(completedBlock);
-		addDivCanv(false);
+		addDivCanv(false, hash);
 
 		// Updates master ledger.  This should not be the job of the miner, this will change
 		updateLedger();

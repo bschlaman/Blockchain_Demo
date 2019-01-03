@@ -1,4 +1,4 @@
-function CanvasBlock(posX, posY, num){
+function CanvasBlock(posX, posY, num, hash){
     this.margins = canvBlockMargin;
     this.width = canvBlockWidth-2*this.margins;
     this.height = canvBlockHeight-2*this.margins;
@@ -12,7 +12,7 @@ function CanvasBlock(posX, posY, num){
 		}
 		return s;
 	}
-	this.hash = '#' + this.randHex(3);
+	this.hash = hash ? '#' + hash : this.randHex(3);
     this.arrowFromPrev = new Arrow({x: null},{y: null});
     this.color = {
         r: Math.random() * 255,
@@ -46,7 +46,7 @@ function CanvasBlock(posX, posY, num){
 		// Bottom Half
 		ctx.fillStyle = 'rgb('+(this.color.r+25)+', '+(this.color.g-25)+', '+(this.color.b-25)+')';
         ctx.fillRect(this.x+this.margins, this.y+this.margins+this.height/2, this.width, this.height/2);
-		ctx.fillStyle = 'rgb('+(this.color.r+100)+', '+(this.color.g+100)+', '+(this.color.b+100)+')';
+		ctx.fillStyle = 'rgb('+(this.color.r+150)+', '+(this.color.g+150)+', '+(this.color.b+150)+')';
 		ctx.font = "15px Arial";
 		ctx.fillText('Hash: ' + this.hash, this.x+(this.width/2)+this.margins, this.y+3*(this.height/4)+this.margins);
     }

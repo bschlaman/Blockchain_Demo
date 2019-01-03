@@ -16,7 +16,7 @@ window.onload=function(){
 
     // Create initial Miner
     miners.push(new Miner());
-    setInterval(miners[0].speedHash, 1000/2);
+    setInterval(function(){eval('miners[0].speedHash();')}, 1000/5);
 
     // Configure Canvas
     canvasOnload();
@@ -208,9 +208,9 @@ canvBlockHeight = 120;
 canvBlockMargin = 20;
 canvBlocksPerLine = 0;
 
-function addDivCanv(fromTestButton){
+function addDivCanv(fromTestButton, hash){
     var pos = getPosition(canvBlocks.length);
-    canvBlocks.push(new CanvasBlock(pos.x, pos.y, canvBlocks.length));
+    canvBlocks.push(new CanvasBlock(pos.x, pos.y, canvBlocks.length, hash));
 	if(fromTestButton){
 		faketrns = []
 		for(var i = 0 ; i < blockSize ; i++){
@@ -218,7 +218,9 @@ function addDivCanv(fromTestButton){
 			faketrns.push(t);
 			allTransactions.push(t);
 		}
-		centBlockchain.push(new Block(faketrns));
+		// Fix the logic to get hash from buttons, not inherit
+		centBlockchain.push(new Block(faketrns, 'inherit', canvBlocks.length-1));
+		updateLedger();
 	}
     updateScroll();
 }

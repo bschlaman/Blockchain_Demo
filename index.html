@@ -27,7 +27,7 @@
             }
 			h1, h2 {
                 text-align: center;
-                text-shadow: 2px 2px #FF0000;
+                text-shadow: 1px 1px #FF0000;
             }
             canvas {
                 background-color: black;
@@ -70,7 +70,7 @@
             #ledger {
                 display: inline-block;
             }
-            #THdiv, #formDiv, #ledger {
+            #THdiv, #formDiv, #ledgerdiv {
                 margin-top: 20px;
                 float: left;
                 margin: 10px;
@@ -86,6 +86,12 @@
             .hashresult{
                 display: inline;
             }
+			#popupfooter {
+				color: black;
+				-webkit-text-fill-color: white; /* Will override color (regardless of order) */
+				-webkit-text-stroke-width: 1px;
+				-webkit-text-stroke-color: black;
+			}
         </style>
     </head>
 
@@ -106,15 +112,15 @@
             <button id='tst' class='canvButton' onclick='manyDivsCanv(23);'>Add Many Divs</button>
             <button id='reorg' class='canvButton' onclick='resetAll();'>Reset</button>
             <!-- Trigger/Open The Modal -->
-            <button id="myBtn">Open Modal</button>
+            <button id="myBtn">Open Verify</button>
             <button onclick='eval(coderun)'>Run BHA</button>
             <br />
 
-            <table id='ledger' border=1></table>
+            <div id='ledgerdiv'><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=1></table></div>
             <div id='THdiv'><p class='pHist'><strong>Transaction History</strong></p><p class='pHist' id='p1'></p></div>
             <!-- <div id='THdiv'><p class='pHist'><strong>BHA Output</strong></p><p class='pHist' id='p2'></p></div> -->
             <div id='formDiv'>
-                <!--<button onclick='createTransaction()'>Create Transaction</button>-->
+                <p style='margin: 0; padding: 10px; text-align: center;'><strong>Create Transaction</strong></p>
                 <form id = 'transForm'>
                     <table border=1>
                         <tr>
@@ -145,15 +151,16 @@
                         <h2>Run Hash on Transactions</h2>
                     </div>
                     <div class="modal-body">
-                        <p>Some text in the Modal Body</p>
+                        <p>Transaction Data:</p>
                         <p id='modalTrans'></p>
                         <p id='resultTitle' class='hashresult'>Result:</p>
                         <p id='result' class='hashresult'></p>
                     </div>
                     <div class="modal-footer">
-                        <h3>Modal Footer</h3>
+                        <h3 id='popupfooter'>Modal Footer</h3>
                         <button id='appendcheck'>Append Guess and Check Hash</button>
                         <button id='runhash'>Speed Run Hash</button>
+						
                     </div>
                 </div>
             </div>

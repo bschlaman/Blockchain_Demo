@@ -1,8 +1,12 @@
-function Block(transactions){
+function Block(transactions, hash, num){
 
     this.blockID = null;
+    this.num = num;
+	this.hash = hash;
+	if(this.hash == 'inherit'){
+		this.hash = canvBlocks[num].hash;
+	}
     this.transactions = transactions;
-    this.num = Math.random(10);
     this.show = function(){
 
 
