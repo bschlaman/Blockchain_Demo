@@ -35,7 +35,7 @@ function Miner(){
 
 			// Eventually, this should be somewhere else so you can close the modal and everything still be there
 			this.verified = false;
-			
+
 			var popup = document.getElementById('popupVerify');
 			popup.style.display = "block";
 			// Make this a better name
@@ -47,16 +47,16 @@ function Miner(){
 				modalTrans.innerHTML += this.capturedTransactions[i].string()+'<br>';
 			}
 			modalTrans.innerHTML += '<br>';
-			
+
 			var prevHash = '#NULL';
 			if(centBlockchain[centBlockchain.length-1]){
 				prevHash = centBlockchain[centBlockchain.length-1].hash;
 			}
 			modalTrans.innerHTML += 'Hash of previous block: ' + prevHash + '<br><br>';
 			this.hashInput += prevHash + '\n';
-			
+
 			modalTrans.innerHTML += 'Appended Hex Guess: ';
-			
+
 			document.getElementById('popupfooter').innerHTML = 'Run hash to verify transactions and create block.' + '<br>';
 			document.getElementById('popupfooter').innerHTML += 'Rule: Hash must start with "0".';
 			document.getElementById('resultTitle').innerHTML = 'Resultant Hash: ';
@@ -88,7 +88,7 @@ function Miner(){
 	this.appendGuessandCheck = function(){
 		// This is to prevent buttons being clicked after verification
 		if(!this.verified){
-			console.log(this.hashInput);
+			//console.log(this.hashInput);
 			var hexGuess = this.randHex(20);
 			var modalTrans = document.getElementById('modalTrans');
 			if(this.hashInput[this.hashInput.length-1-20] == '!'){
@@ -99,7 +99,7 @@ function Miner(){
 			modalTrans.innerHTML += hexGuess;
 
 			var resP = document.getElementById('result');
-			var result = bHA(this.hashInput);
+			var result = SHA(this.hashInput);
 			result = result.substring(4, 7);
 			resP.innerHTML = result;
 

@@ -8,35 +8,42 @@ function bHA(message){
         byteArray.push(message.charCodeAt(i));
     }
 
-    // Create array of 0s, nonzero multiple of 16
-    numWords = (((message.length + 8) >> 6) + 1) * 16;
+    // My bins are of size 2 bytes, or 2 letters.  8 bins total,
+    // so 128 bits per block.  Message size is 2 bytes, with 1 byte padding.
+    // function numWord(n){return (((n + 2) >> 4) + 1) * 8;}
+    for(var i = 0 ; i < 50 ; i++){
+        //console.log(i + ' : ' + (i>>1) + ' : ' + (8-(i%2)*8));
+    }
+
+
+    // Create array of 0s, nonzero multiple of 8
+    numWords = (((message.length + 2) >> 4) + 1) * 8;
     var wordBlocks = [];
     for(var i = 0 ; i < numWords ; i++){
         wordBlocks[i] = 0;
     }
 
-    //console.log(wordBlocks);
-
     // SHA-1 padding standard
     var i;
     for(i = 0; i < byteArray.length; i++) {
-        wordBlocks[i >> 2] |= byteArray[i] << (24 - (i % 4) * 8);
+        wordBlocks[i >> 1] |= byteArray[i] << (8 - (i % 2) * 8);
     }
-    wordBlocks[i >> 2] |= 0x80 << (24 - (i % 4) * 8);
+    wordBlocks[i >> 1] |= 0x80 << (8 - (i % 2) * 8);
     wordBlocks[wordBlocks.length - 1] = byteArray.length * 8;
+
+    //console.log(wordBlocks);
 
     // Declaring initial 5 words
     var w = [];
-    var A = 0x67452301;
-    var B = 0xEFCDAB89;
-    var C = 0x98BADCFE;
-    var D = 0x10325476;
-    var E = 0xC3D2E1F0;
-
+    var A = 0xBBBB;
+    var B = 0x1337;
+    var C = 0xA5DF;
+    var D = 0x1235;
+    var E = 0x15D0;
 
 
     // Processes the 512 bit blocks (or groups of 16 words) one by one
-    for(i = 0; i < wordBlocks.length; i += 16) {
+    for(i = 0; i < wordBlocks.length; i += 8) {
         var oldA = A;
         var oldB = B;
         var oldC = C;
@@ -44,14 +51,14 @@ function bHA(message){
         var oldE = E;
 
         // Each 512 bit block takes 80 steps
-        for(var j = 0; j < 80; j++) {
-            w[j] = (j < 16) ? wordBlocks[i + j] : rol(w[j-3] ^ w[j-8] ^ w[j-14] ^ w[j-16], 1);
+        for(var j = 0; j < 20; j++) {
+            w[j] = (j < 8) ? wordBlocks[i + j] : rol(w[j-1] ^ w[j-4] ^ w[j-5] ^ w[j-7], 1);
 
             var t = rol(A, 5) + E + w[j] +
-               ( (j < 20) ?  1518500249 + ((B & C) | ((~B) & D))
-               : (j < 40) ?  1859775393 + (B ^ C ^ D)
-               : (j < 60) ? -1894007588 + ((B & C) | (B & D) | (C & D))
-               : -899497514 + (B ^ C ^ D) );
+               ( (j < 5) ?  0xABCD + ((B & C) | ((~B) & D))
+               : (j < 10) ?  0xDEF6 + (B ^ C ^ D)
+               : (j < 15) ? 0xACE6 + ((B & C) | (B & D) | (C & D))
+               : 0x6660 + (B ^ C ^ D) );
             E = D;
             D = C;
             C = rol(B, 30);
@@ -66,15 +73,17 @@ function bHA(message){
     }
 
     var words = [A, B, C, D, E];
-    result = '';
+    var result = '';
+    var tracker = [];
     for(var i = 0 ; i < words.length ; i++){
         hexWord = words[i].toString(16);
+        tracker[i] = words[i].toString(16);
         while(hexWord.length < 8){hexWord = '0' + hexWord;}
         result += hexWord;
     }
 
-    return result;
-    // console.log(result);
+    console.log(tracker);
+    //return result;
 
     // console.log(byteArray);
     // console.log(wordBlocks);
@@ -94,7 +103,7 @@ function bHA(message){
     function rol(num, cnt) {
         return (num << cnt) | (num >>> (32 - cnt));
     }
-    function numWord(n){return (((n + 8) >> 6) + 1) * 16;}
+    //function numWord(n){return (((n + 8) >> 6) + 1) * 16;}
     //function syslog(x){document.getElementById('p2').innerHTML+=x+"<br>";}
 
 }

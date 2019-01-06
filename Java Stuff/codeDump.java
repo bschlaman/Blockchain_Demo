@@ -21,14 +21,14 @@ public class codeDump {
         }
         return amt;
     }
-	
+
 	public static void crap2() {
-    
+
 		for(int i = 0 ; i < 100 ; i++){
 			int x = (((i + 8) >> 6) + 1) * 16;
 			System.out.println(i+": "+x);
 		}
-    
+
 	}
 
 
@@ -126,6 +126,62 @@ public class codeDump {
     public static String print(){return null;}
 
 
+
+
+
+
+    public static void main(String []args){
+
+
+       String a = encodeHex("abc");
+
+
+       System.out.println(a);
+       System.out.println("a9993e3614706816aba3e25717850c26c9cd0d89d");
+
+        System.out.println("\n\n\n");
+       System.out.println(rol(44444,500));
+      System.out.println(Integer.MAX_VALUE);
+       System.out.println(Integer.MAX_VALUE+1);
+       System.out.println("\n\n\n");
+        System.out.println("\n\n\n");
+
+       for(int k = 0 ; k < 300 ; k++){
+           String[] sar = encodeHex(Integer.toString(k));
+           for(int j = 0 ; j < sar.length ; j++){
+               if(sar[j].charAt(0) == "-"){
+                   System.out.println("asdf");
+               }
+           }
+       }
+
+
+    }
+
+
+
+    // Convert 160 bit hash to base64
+
+
+    int[] words = {a,b,c,d,e};
+    StringBuilder sb = new StringBuilder();
+
+
+  String[] tracker = new String[5];
+  int counter = 0;
+
+    for(int word : words) {
+        String hexWord = Integer.toHexString(word);
+        //Because to hexstring apparently doesn't pad?
+        while(hexWord.length() < 8) {
+            hexWord = "0" + hexWord;
+        }
+        sb.append(hexWord);
+        tracker[counter] = hexWord;
+        counter++;
+    }
+  return tracker;
+    //return sb.toString();
 
 
 
