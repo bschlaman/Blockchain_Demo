@@ -96,7 +96,18 @@ function SHA(message){
         return (num << cnt) | (num >>> (32 - cnt));
     }
     function numWord(n){return (((n + 8) >> 6) + 1) * 16;}
-    //function syslog(x){document.getElementById('p2').innerHTML+=x+"<br>";}
+    function bit32(hexString){
+		if(parseInt(hexString, 16) > 0x7FFFFFFF){
+			return  
+		}
+	}
+	
+	function jav(num){
+		
+	}
+	
+	//function syslog(x){document.getElementById('p2').innerHTML+=x+"<br>";}
+	
 
 }
 
