@@ -13,6 +13,7 @@ window.onload=function(){
 	blockSize = 4;
     names = ["Brendan","Jason","Lauren","Kirsten","Mike","Bailey","Christa","Mark","Ralph","Judy","Julie","Bob","Alice","Charlie"];
 	startCredits = 1000;
+	miningReward = 200;
 
     // Create initial Miner
     miners.push(new Miner());
@@ -153,6 +154,7 @@ function modalCreate(){
     var btn = document.getElementById("myBtn");
 
     document.getElementById('appendcheck').onclick = function(){eval('miners[0].appendGuessandCheck();')};
+	document.getElementById('addreward').onclick = function(){eval('miners[0].addReward();')};
     document.getElementById('runhash').onclick = function(){eval('miners[0].startHash();')};
 
     // Get the <span> element that closes the modal

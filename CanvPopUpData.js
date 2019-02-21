@@ -32,7 +32,7 @@ function CanvPopUpData(posX, posY, num, color){
 
 		if(centBlockchain[num-1]){
 			ctx.fillText('Hash of', xpos+(this.width/2), ypos+(20));
-			ctx.fillText('Previous Block: #' + centBlockchain[num-1].hash, xpos+(this.width/2), ypos+(40));
+			ctx.fillText('Previous Block: ' + centBlockchain[num-1].hash, xpos+(this.width/2), ypos+(40));
 		}
 		ctx.fillStyle = 'rgb('+(this.color.r+150)+', '+(this.color.g+150)+', '+(this.color.b+150)+')';
 		for(var i = 0 ; i < centBlockchain[num].transactions.length ; i++){

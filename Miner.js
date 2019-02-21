@@ -31,7 +31,7 @@ function Miner(){
 
 
 	this.openVerification = function(){
-		if(this.capturedTransactions.length % blockSize == 0 && this.capturedTransactions.length>0){
+		if(this.capturedTransactions.length % blockSize == 0 && this.capturedTransactions.length > 0){
 
 			// Eventually, this should be somewhere else so you can close the modal and everything still be there
 			this.verified = false;
@@ -68,6 +68,18 @@ function Miner(){
 
 		}
 	};
+	
+	this.rewardAdded = false;
+	this.addReward = function(){
+		if(!this.rewardAdded && !this.verified){
+			var modalTrans = document.getElementById('modalTrans');
+			var i = modalTrans.innerHTML.indexOf('Hash') - 4;
+			modalTrans.innerHTML = modalTrans.innerHTML.slice(0, i) + '-\> Brendan : ' + miningReward + '<br>' + modalTrans.innerHTML.slice(i);
+			p1.innerHTML += 'Brendan received ' + miningReward + ' from mining<br>';
+			this.capturedTransactions.push(new Transaction('', 'Brendan', miningReward));
+			this.rewardAdded = true;
+		}
+	}
 
 	this.hashOn = false;
 	this.startHash = function(){
@@ -91,6 +103,7 @@ function Miner(){
 			//console.log(this.hashInput);
 			var hexGuess = this.randHex(20);
 			var modalTrans = document.getElementById('modalTrans');
+			
 			if(this.hashInput[this.hashInput.length-1-20] == '!'){
 				this.hashInput = this.hashInput.substring(0, this.hashInput.length-21);
 				modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-20);
@@ -107,6 +120,7 @@ function Miner(){
 				this.hashOn = false;
 				document.getElementById('popupfooter').innerHTML = 'Hash Found! Block is pushed to Blockchain.';
 				this.verified = true;
+				this.rewardAdded = false;
 				this.pushTransactionsToBlockchain(result);
 			}
 		}
@@ -131,7 +145,7 @@ function Miner(){
 	this.pushTransactionsToBlockchain = function(hash){
 
 		// Miner creates block for now, this may change
-		var completedBlock = new Block(this.capturedTransactions.slice(0), hash);
+		var completedBlock = new Block(this.capturedTransactions.slice(0), '#' + hash);
 
 		// Push to blockchain
 		centBlockchain.push(completedBlock);

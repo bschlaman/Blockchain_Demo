@@ -12,7 +12,7 @@ function CanvasBlock(posX, posY, num, hash){
 		}
 		return s;
 	}
-	this.hash = hash ? '#' + hash : this.randHex(3);
+	this.hash = hash ? hash : '#' + this.randHex(3);
     this.arrowFromPrev = new Arrow({x: null},{y: null});
     this.color = {
         r: Math.random() * 255,
