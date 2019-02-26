@@ -1,0 +1,29 @@
+
+abd
+
+ cb4cc28d  f0fdbe0e cf9d9662  e294b118  092a5735
+1cb4cc28d 1f0fdbe0e cf9d9662 -1d6b4ee81 092a5735
+
+ "0xcb4cc28d"  "0xf0fdbe0e" "0xcf9d9662"  "0xe294b118"  "0x092a5735"
+"0x1cb4cc28d" "0x1f0fdbe0e" "0xcf9d9662" "-0x1d6b4ee81" "0x092a5735"
+
+// Dec to Hex
+(2147483647).toString(16)
+(-2147483648).toString(16)
+
+// Hex to Dec
+parseInt("0x", 16);
+
+
+
+// Goal
+
+The goal is to make a function that takes in an int possibly bigger in magnitude than 0x80000000, and spit out a value within that range
+
+	function c(num){
+		for (var i = -33 ; i < 33 ; i++){
+			var f = (i+9)%18 - 9;
+			console.log(i + " : " + f);
+			
+		}
+	}

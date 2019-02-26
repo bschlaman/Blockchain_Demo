@@ -69,6 +69,7 @@ function Miner(){
 		}
 	};
 	
+	// Need to multiply the reward by some number instead of subtracting here
 	this.rewardAdded = false;
 	this.addReward = function(){
 		if(!this.rewardAdded && !this.verified){
@@ -78,6 +79,7 @@ function Miner(){
 			p1.innerHTML += 'Brendan received ' + miningReward + ' from mining<br>';
 			this.capturedTransactions.push(new Transaction('', 'Brendan', miningReward));
 			this.rewardAdded = true;
+			miningReward = Math.floor(miningReward*rewardDRate);
 		}
 	}
 
@@ -121,6 +123,7 @@ function Miner(){
 				document.getElementById('popupfooter').innerHTML = 'Hash Found! Block is pushed to Blockchain.';
 				this.verified = true;
 				this.rewardAdded = false;
+				numVerify++;
 				this.pushTransactionsToBlockchain(result);
 			}
 		}

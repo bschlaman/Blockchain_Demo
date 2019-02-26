@@ -105,6 +105,14 @@ function bHA(message){
     }
     //function numWord(n){return (((n + 8) >> 6) + 1) * 16;}
     //function syslog(x){document.getElementById('p2').innerHTML+=x+"<br>";}
+	
+	function c(num){
+		for (var i = -33 ; i < 33 ; i++){
+			var f = x%18 - 9;
+			console.log(i + " : " + f);
+			
+		}
+	}
 
 }
 

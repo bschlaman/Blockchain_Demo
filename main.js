@@ -14,6 +14,8 @@ window.onload=function(){
     names = ["Brendan","Jason","Lauren","Kirsten","Mike","Bailey","Christa","Mark","Ralph","Judy","Julie","Bob","Alice","Charlie"];
 	startCredits = 1000;
 	miningReward = 200;
+	rewardDRate = 0.9;
+	numVerify = 0;
 
     // Create initial Miner
     miners.push(new Miner());
