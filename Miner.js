@@ -114,7 +114,7 @@ function Miner(){
 			modalTrans.innerHTML += hexGuess;
 
 			var resP = document.getElementById('result');
-			var result = SHA(this.hashInput);
+			var result = bHA(this.hashInput);
 			result = result.substring(4, 7);
 			resP.innerHTML = result;
 

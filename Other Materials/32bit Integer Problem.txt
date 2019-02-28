@@ -1,8 +1,8 @@
 
 abd
 
- cb4cc28d  f0fdbe0e cf9d9662  e294b118  092a5735
-1cb4cc28d 1f0fdbe0e cf9d9662 -1d6b4ee81 092a5735
+ cb4cc28d  f0fdbe0e cf9d9662   e294b118  092a5735
+1cb4cc28d 1f0fdbe0e cf9d9662  -1d6b4ee8 1092a5735
 
  "0xcb4cc28d"  "0xf0fdbe0e" "0xcf9d9662"  "0xe294b118"  "0x092a5735"
 "0x1cb4cc28d" "0x1f0fdbe0e" "0xcf9d9662" "-0x1d6b4ee81" "0x092a5735"
@@ -27,3 +27,7 @@ The goal is to make a function that takes in an int possibly bigger in magnitude
 			
 		}
 	}
+	
+	
+11100010100101001011000100011000
+111010110101101001110111010000001

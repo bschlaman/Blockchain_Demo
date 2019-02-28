@@ -76,42 +76,35 @@ function bHA(message){
     var result = '';
     var tracker = [];
     for(var i = 0 ; i < words.length ; i++){
-        hexWord = words[i].toString(16);
-        tracker[i] = words[i].toString(16);
+        hexWord = bit32(words[i].toString(16));
+        tracker[i] = bit32(words[i].toString(16));
         while(hexWord.length < 8){hexWord = '0' + hexWord;}
         result += hexWord;
     }
 
     console.log(tracker);
-    //return result;
-
-    // console.log(byteArray);
-    // console.log(wordBlocks);
-    // console.log(message.length);
-    // for(var i = 0 ; i < 140 ; i++){
-    //     syslog(i + ': ' + numWord(i));
-    // }
-    // w = [];
-    // i = 0;
-    // for(var j = 0; j < 80; j++) {
-    //     w[j] = (j < 16) ? wordBlocks[i + j] : rol(w[j-3] ^ w[j-8] ^ w[j-14] ^ w[j-16], 1);
-    // }
-    // console.log(w);
-    // w = [];
+    return result;
 
 
     function rol(num, cnt) {
         return (num << cnt) | (num >>> (32 - cnt));
     }
-    //function numWord(n){return (((n + 8) >> 6) + 1) * 16;}
-    //function syslog(x){document.getElementById('p2').innerHTML+=x+"<br>";}
-	
-	function c(num){
-		for (var i = -33 ; i < 33 ; i++){
-			var f = x%18 - 9;
-			console.log(i + " : " + f);
-			
+
+    function bit32(hexString){
+		var signed32MAXINT = 2147483647;
+		var dec = parseInt(hexString, 16);
+		var dec32;
+		if(dec < 0){
+			dec32 = (dec-signed32MAXINT-1)%(2*(signed32MAXINT+1)) + signed32MAXINT + 1;
 		}
+		else{
+			dec32 = (dec+signed32MAXINT+1)%(2*(signed32MAXINT+1)) - signed32MAXINT - 1;
+		}
+		
+		if(dec32 < 0){
+			dec32 += Math.pow(2, 32)
+		}
+		return dec32.toString(16);
 	}
 
 }
