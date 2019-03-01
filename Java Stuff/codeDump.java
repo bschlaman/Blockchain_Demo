@@ -188,7 +188,54 @@ public class codeDump {
 
 
 
+public class HelloWorld{
 
+     public static void main(String []args){
+         
+         
+        System.out.println(Integer.MIN_VALUE);
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println( Integer.MIN_VALUE - 1);
+        System.out.println( Integer.MAX_VALUE + 1);
+        
+        System.out.println(Integer.toBinaryString(-442080954));
+        System.out.println(Integer.toHexString(692785535));
+        
+        System.out.println(Integer.toHexString(692785535));
+        
+        String bin = "1100010100101001011000100011000";
+        System.out.println(bin.length());
+       
+        String hex = "e294b118";
+        
+        System.out.println("\n\nDec and Hex========");
+        int decimal = Integer.parseInt(bin,2);
+        System.out.println(decimal);
+        String hexStr = Integer.toString(decimal,16);
+        System.out.println(hexStr);
+        
+        //int decimal2 = Integer.parseInt(hex,16);
+        //String hexStr2 = Integer.toString(decimal2,16);
+        //System.out.println(hexStr2);
+        //System.out.println(decimal2);
+        //System.out.println(hex.substring(2,2));
+        String bi = "";
+        for (int i = 0 ; i < hex.length() ; i ++){
+            int x = Integer.parseInt(Character.toString(hex.charAt(i)), 16);
+            
+            String y = Integer.toString(x,2);
+            while(y.length() < 4){
+                y = "0" + y;
+            }
+            bi += y;
+        }
+        System.out.println(bi);
+        System.out.println(0b1 ^ 0b0000);
+        
+        
+        
+     }
+}
 
 
 

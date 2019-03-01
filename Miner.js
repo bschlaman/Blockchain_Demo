@@ -48,17 +48,18 @@ function Miner(){
 			}
 			modalTrans.innerHTML += '<br>';
 
-			var prevHash = '#NULL';
+			var prevHash = 'NULL';
+			// A.k.a if central blockchain is bigger than size 1
 			if(centBlockchain[centBlockchain.length-1]){
 				prevHash = centBlockchain[centBlockchain.length-1].hash;
 			}
-			modalTrans.innerHTML += 'Hash of previous block: ' + prevHash + '<br><br>';
+			modalTrans.innerHTML += 'Hash of previous block: ' + '#' + prevHash + '<br><br>';
 			this.hashInput += prevHash + '\n';
 
 			modalTrans.innerHTML += 'Appended Hex Guess: ';
 
 			document.getElementById('popupfooter').innerHTML = 'Run hash to verify transactions and create block.' + '<br>';
-			document.getElementById('popupfooter').innerHTML += 'Rule: Hash must start with "0".';
+			document.getElementById('popupfooter').innerHTML += 'Rule: Hash must start with "0".'+ '<br>';
 			document.getElementById('resultTitle').innerHTML = 'Resultant Hash: ';
 			document.getElementById('result').innerHTML = '';
 
@@ -69,7 +70,7 @@ function Miner(){
 		}
 	};
 	
-	// Need to multiply the reward by some number instead of subtracting here
+	// Need to multiply the reward by some number instead of subtracting here: DONE
 	this.rewardAdded = false;
 	this.addReward = function(){
 		if(!this.rewardAdded && !this.verified){
@@ -116,11 +117,11 @@ function Miner(){
 			var resP = document.getElementById('result');
 			var result = bHA(this.hashInput);
 			result = result.substring(4, 7);
-			resP.innerHTML = result;
+			resP.innerHTML = '#' + result;
 
 			if(this.verifyHash(result)){
 				this.hashOn = false;
-				document.getElementById('popupfooter').innerHTML = 'Hash Found! Block is pushed to Blockchain.';
+				document.getElementById('popupfooter').innerHTML += 'Hash Found! Block is pushed to Blockchain.';
 				this.verified = true;
 				this.rewardAdded = false;
 				numVerify++;
@@ -145,10 +146,11 @@ function Miner(){
 		return s;
 	}
 
+	// What is handling where the # is?  Create a consistent system for the # of hashes that makes sense
 	this.pushTransactionsToBlockchain = function(hash){
 
 		// Miner creates block for now, this may change
-		var completedBlock = new Block(this.capturedTransactions.slice(0), '#' + hash);
+		var completedBlock = new Block(this.capturedTransactions.slice(0), hash);
 
 		// Push to blockchain
 		centBlockchain.push(completedBlock);
