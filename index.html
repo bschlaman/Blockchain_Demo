@@ -45,8 +45,8 @@
                 display: inline-block;
                 /* float: left; */
                 resize: both;
-                margin-bottom: 10px;
-                margin-right: 10px;
+                margin-bottom: 15px;
+                margin-right: 15px;
             }
             #minerHUD{
                 overflow: hidden;
@@ -74,16 +74,19 @@
                 display: inline-block;
             }
             #THdiv, #formDiv, #ledgerdiv {
-                margin-top: 20px;
                 float: left;
                 margin: 10px;
-                background-color: #e19f9d;
+                margin-top: 15px;
+				background-color: #e19f9d;
                 border-radius: 10px;
-                padding: 5px;
+                padding: 10px;
             }
             .formButton {
-                display: inline-block;
-                margin-top: 5px;
+				/*display: inline-block;*/
+				margin-top: 5px;
+				height:30px;
+				font-size:.8em;
+				padding:0 1em;
             }
 
 			#modalTrans{
@@ -143,8 +146,12 @@
                             <td>Amount: </td><td><input type="text" name="amount" placeholder="Amount $$$"></td>
                         </tr>
                     </table>
-                    <input class="formButton" type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>
+                    <!--
+					<input class="formButton" type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>
                     <input class="formButton" type="button" value="Random Transaction" onclick='createTransaction(null, null, null);'>
+					-->
+					<button class="formButton" type="button" class="formButton" onclick='createTransaction(null, null, null);'>Create Transaction</button>
+					<button class="formButton" type="button" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>Random Transaction</button>
 				</form>
 			</div>
 

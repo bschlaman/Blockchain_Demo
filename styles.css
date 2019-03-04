@@ -1,6 +1,6 @@
 /* BUTTON STUFF */
 
-button{
+button {
     background:#BD3D3A;
     color:#fff;
     border:none;
@@ -16,7 +16,7 @@ button:hover{
     background:#fff;
     color:#BD3D3A;
 }
-button:before,button:after{
+button:before, button:after{
     content:'';
     position:absolute;
     top:0;
@@ -32,7 +32,7 @@ button:after{
     left:0;
     bottom:0;
 }
-button:hover:before,button:hover:after{
+button:hover:before, button:hover:after{
     width:100%;
     transition:800ms ease all;
 }
