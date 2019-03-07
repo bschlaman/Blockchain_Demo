@@ -21,11 +21,11 @@
 			}
             #wrapper {
                 font-family: "Ariel", sans-serif;
+				border: 2px solid red;
+				
                 margin-right: auto;
                 margin-left: auto;
-                /* This is hardcoded for now until I figure out how to keep that goddamn
-                temp block from moving down */
-                width: 100%;
+                max-width: 1000px;
                 white-space: nowrap;
             }
 			h1, h2 {
@@ -58,29 +58,24 @@
 
             button.canvButton {vertical-align: top;}
 
-            #formDiv {display: inline-block; vertical-align: top;}
-            .pHist {margin: 0;}
-            .pHist:first-of-type {padding: 10px;}
-            #p2 {text-align: left;}
-            #THdiv {
-                display: inline-block;
-                height: 354px;
-                width: 280px;
-                overflow-y: scroll;
-                background-color: #e19f9d;
-                text-align: center;
-            }
-            #ledger {
-                display: inline-block;
-            }
-            #THdiv, #formDiv, #ledgerdiv {
-                float: left;
+            .display {
+				display: inline-block;
+				vertical-align: top;
                 margin: 10px;
                 margin-top: 15px;
 				background-color: #e19f9d;
                 border-radius: 10px;
                 padding: 10px;
             }
+            #THdiv {
+                height: 354px;
+                width: 280px;
+                overflow-y: scroll;
+                text-align: center;
+            }
+            .pHist {margin: 0;}
+            .pHist:first-of-type {padding: 10px;}
+            #p2 {text-align: left;}
             .formButton {
 				/*display: inline-block;*/
 				margin-top: 5px;
@@ -129,10 +124,9 @@
             <button onclick='eval(coderun)'>Run BHA</button>
             <br />
 
-            <div id='ledgerdiv'><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=1></table></div>
-            <div id='THdiv'><p class='pHist'><strong>Transaction History</strong></p><p class='pHist' id='p1'></p></div>
-            <!-- <div id='THdiv'><p class='pHist'><strong>BHA Output</strong></p><p class='pHist' id='p2'></p></div> -->
-            <div id='formDiv'>
+            <div id='ledgerdiv' class="display"><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=1></table></div>
+            <div id='THdiv' class="display"><p class='pHist'><strong>Transaction History</strong></p><p class='pHist' id='p1'></p></div>
+            <div id='formDiv' class="display">
                 <p style='margin: 0; padding: 10px; text-align: center;'><strong>Create Transaction</strong></p>
                 <form id = 'transForm'>
                     <table border=1>

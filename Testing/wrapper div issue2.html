@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TEST</title>
+
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <style>
+			body {
+				background: #d8d8d8;
+                /* background: #ffffff; */
+
+			}
+            #wrapper {
+                font-family: "Ariel", sans-serif;
+				border: 2px solid purple;
+				
+                margin-right: auto;
+                margin-left: auto;
+                max-width: 1000px;
+                white-space: nowrap;
+            }
+			div {
+				border: 2px solid green
+			}
+			
+			.display {
+				display: inline-block;
+				vertical-align: top;
+                margin: 10px;
+                margin-top: 15px;
+				background-color: #e19f9d;
+                border-radius: 10px;
+                padding: 10px;
+			}
+
+        </style>
+    </head>
+
+
+
+    <body>
+        <div id="wrapper">
+
+            <h1>Test</h1>
+            <h2>Test</h2>
+
+
+            <br />
+            <button>Add Div on Canvas</button>
+            <button>Add Many Divs</button>
+            <button>Reset</button>
+            <!-- Trigger/Open The Modal -->
+            <button>Open Verify</button>
+            <button>Run BHA</button>
+            <br />
+
+            <div id='ledgerdiv' class="display"><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=1></table></div>
+            <div id='THdiv' class="display"><p class='pHist'><strong>Transaction History</strong></p><p class='pHist' id='p1'></p></div>
+            <div id='formDiv' class="display">
+				<button class="formButton" type="button" class="formButton" onclick='createTransaction(null, null, null);'>Create Transaction</button>
+				<button class="formButton" type="button" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>Random Transaction</button>
+			</div>
+
+
+
+
+        </div>
+    </body>
+</html>
