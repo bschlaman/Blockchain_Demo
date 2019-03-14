@@ -1,0 +1,5 @@
+CURRENT ISSUES
+
+Canvas popup: when popup can't fit high or low, it should prefer low
+Automatic transactions: Transactions getting added to block while modal is up
+Layout: improve this in general
