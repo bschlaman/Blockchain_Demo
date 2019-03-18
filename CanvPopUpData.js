@@ -16,7 +16,9 @@ function CanvPopUpData(posX, posY, num, color){
 		else{
 			xpos -= (this.mouseoffset + this.width);
 		}
-		if(this.y + this.mouseoffset + this.height > ctx.canvas.parentElement.clientHeight && this.y - this.mouseoffset - this.height > 0 + ctx.canvas.parentElement.scrollTop){
+		
+		var scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
+		if(this.y + this.mouseoffset + this.height > ctx.canvas.parentElement.clientHeight && this.y - this.mouseoffset - this.height > scrollTop + ctx.canvas.parentElement.scrollTop){
 			ypos -= (this.mouseoffset + this.height);
 		}
 		else{

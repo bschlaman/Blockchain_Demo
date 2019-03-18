@@ -20,7 +20,7 @@ window.onload=function(){
     // Create initial Miner
     miners.push(new Miner());
     setInterval(function(){eval('miners[0].speedHash();')}, 1000/5);
-	setInterval(function(){createTransaction(null, null, null)}, 1000/0.5);
+	// setInterval(function(){createTransaction(null, null, null)}, 1000/0.5);
 
     // Configure Canvas
     canvasOnload();
