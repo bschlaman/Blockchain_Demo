@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body {
+
+            }
+            #wrapper {
+                margin-right: auto;
+                margin-left: auto;
+                max-width: 1000px;
+                text-align: center;
+                /* white-space: nowrap; */
+
+                outline: 2px solid lightblue;
+            }
+            div :not(#wrapper){
+                height: 500px;
+            }
+            #canvDiv, .pane {
+                display: inline-block;
+            }
+            .pane {
+                width: 30%;
+
+            }
+            #canvDiv{
+                width: 70%;
+                outline: 2px solid black;
+            }
+            #left_pane{
+                outline: 2px solid orange;
+                right: 0;
+            }
+            #right_pane{
+                outline: 2px solid red;
+                
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="canvDiv"></div>
+            <div id="left_pane" class="pane"></div>
+            <div id="right_pane" class="pane"></div>
+        </div>
+    </body>
+</html>
