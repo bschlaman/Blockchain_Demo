@@ -187,7 +187,7 @@ function Miner(){
 		this.trnsContainer.style.background = '#e19f9d';
 		this.trnsContainer.style.borderTopLeftRadius = '10px';
 		this.trnsContainer.style.borderTopRightRadius = '10px';
-		this.trnsContainer.style.width = 250 + 'px';
+		this.trnsContainer.style.width = "80%";
 		this.trnsContainer.style.height = 300-30+6 + 'px';
 
 		// Verify and Push button, lots of fancy css in styles.css

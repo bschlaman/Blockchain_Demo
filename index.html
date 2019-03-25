@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>BC Visualizer</title>
+        <title>Layout Test</title>
         <script src="main.js" type="text/javascript"></script>
         <script src="Miner.js" type="text/javascript"></script>
         <script src="Block.js" type="text/javascript"></script>
@@ -13,159 +13,125 @@
         <script src="SHA.js" type="text/javascript"></script>
         <script src="bHA.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" type="text/css" href="content_styles.css">
         <style>
-			body {
-				background: #d8d8d8;
-                /* background: #ffffff; */
-
-			}
+            body {
+				background: #e8e8e8;
+				font-family: "Ariel", sans-serif;
+            }
             #wrapper {
-                font-family: "Ariel", sans-serif;
-				border: 2px solid red;
-				
                 margin-right: auto;
                 margin-left: auto;
-                max-width: 1000px;
-                white-space: nowrap;
-				text-align: center;
-            }
-			h1, h2 {
+                max-width: 100%;
                 text-align: center;
-                text-shadow: 1px 1px #FF0000;
+                /* white-space: nowrap; */
+
+                outline: 2px solid lightblue;
             }
-            canvas {
-                background-color: black;
-            }
-            #cBlockchain{
-                width: 795px;
-                height: 350px;
-                border: 3px solid red;
-                vertical-align: top;
-                overflow-y: scroll;
-				overflow-x: hidden;
-                display: inline-block;
-                resize: both;
-                margin-bottom: 15px;
-                margin-right: 15px;
-            }
-            #minerHUD{
-                overflow: hidden;
+            #cBlockchain, .pane {
                 display: inline-block;
             }
-            #VP{
-                width: 200px;
-            }
-
-			#canvButtons{
-				border: 2px solid purple;
-			
-			}
-
-            .display {
-				display: inline-block;
+            .pane {
+				position: absolute;
+                width: 20%;
+				height: 95%;
+				margin-bottom: 1em;
 				vertical-align: top;
-                margin: 10px;
-                margin-top: 15px;
-				background-color: #e19f9d;
-                border-radius: 10px;
-                padding: 10px;
-				text-align: left;
-            }
-			#ledger td:nth-child(2){
-				text-align: center;
+				background-color: lightblue;
+				overflow-y: scroll;
+				<!-- resize: both; -->
 			}
-            #transactionHistoryDiv {
-                height: 354px;
-                width: 280px;
-                overflow-y: scroll;
-                text-align: center;
+            #left_pane{
+                outline: 2px solid orange;
+                left: 0;
+				<!-- float: left;S -->
             }
-            .pInTransHistDiv {margin: 0;}
-            .pInTransHistDiv:first-of-type {padding: 10px;}
-            .formButton {
-				/*display: inline-block;*/
-				margin-top: 5px;
-				height:30px;
-				font-size:.8em;
-				padding:0 1em;
+            #right_pane{
+                outline: 2px solid red;
+				right: 0;
+				<!-- float: right; -->
             }
+			#canvButtons{
+				
+				display: inline-block;
+				width: 60%;
+				border: 2px solid purple;
 
-			#popupVerify{
-				text-align: left;
+				height: 10%;
+				background-color: lightblue;
 			}
-			#modalTrans{
-				margin-left: 15px;
-				width: 300px;
-				padding: 5px;
-				background: #ff6666;
-			}
-            .hashresult{
-                display: inline;
-            }
-			#popupfooter {
-				color: black;
-				-webkit-text-fill-color: white; /* Will override color (regardless of order) */
-				-webkit-text-stroke-width: 1px;
-				-webkit-text-stroke-color: black;
-			}
+			
+		
+
         </style>
     </head>
 
-
-
     <body>
+	
         <div id="wrapper">
-
-            <h1>Blockchain Learning Tool</h1>
-            <h2>Coded by Brendan Schlaman</h2>
-
-            <div id='cBlockchain'><canvas id='canv'></canvas></div>
-            <div id='minerHUD'></div>
+		
 
 
-            <br />
+			<!-- Having the buttons inside cBlockchail will cause issues -->
+            <div id="cBlockchain"><canvas id='canv'></canvas>
+			</div>
+
+			<!-- <br> -->
 			
-			<div id="canvButtons">
-				<button id='addc' class='canvButton' onclick='addDivCanv(true);'>Add Div on Canvas</button>
-				<button id='tst' class='canvButton' onclick='manyDivsCanv(23);'>Add Many Divs</button>
-				<button id='reorg' class='canvButton' onclick='resetAll();'>Reset</button>
+			<!-- BUTTONS -->
+			<!-- <br/> -->
+			<!-- <div id="canvButtons"> -->
+				<!-- <button id='addc' class='canvButton' onclick='addDivCanv(true);'>Add Div on Canvas</button> -->
+				<!-- <button id='tst' class='canvButton' onclick='manyDivsCanv(23);'>Add Many Divs</button> -->
+				<!-- <button id='reorg' class='canvButton' onclick='resetAll();'>Reset</button> -->
 				<!-- Trigger/Open The Modal -->
-				<button id="myBtn">Open Verify</button>
-				<button onclick='eval(coderun)'>Listen</button>
+				<!-- <button id="myBtn">Open Verify</button> -->
+				<!-- <button onclick='eval(coderun)'>Listen</button> -->
+			<!-- </div> -->
+			
+
+			
+			<!-- LEFT PANE -->
+            <div id="left_pane" class="pane">
+			
+				<h1>Blockchain Learning Tool</h1>
+				<h2>Coded by Brendan Schlaman</h2>
+			
+				<!-- CREATE TRANSACTION -->
+				<div id='formDiv' class="display">
+					<p style='margin: 0; padding: 10px; text-align: center;'><strong>Create Transaction</strong></p>
+					<form id='transForm'>
+						<table border=1 style="width: 100%; font-size: 1em;">
+							<tr>
+								<td>From: </td><td><input type="text" name="sender" placeholder="Sender"></td>
+							</tr>
+							<tr>
+								<td>To: </td><td><input type="text" name="receiver" placeholder="Receiver"></td>
+							</tr>
+							<tr>
+								<td>Amount: </td><td><input type="text" name="amount" placeholder="Amount $$$"></td>
+							</tr>
+						</table>
+						<button class="formButton" type="button" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>Create Transaction</button>
+						<button class="formButton" type="button" class="formButton" onclick='createTransaction(null, null, null);'>Random Transaction</button>
+					</form>
+				</div>
+			<div id='ledgerdiv' class="display"><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=1></table></div>
 			</div>
 			
-            <br />
 
-            <div id='ledgerdiv' class="display"><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=1></table></div>
-            <div id='transactionHistoryDiv' class="display"><p class='pInTransHistDiv'><strong>Transaction History</strong></p><p class='pInTransHistDiv' id='p1'></p></div>
-            <div id='formDiv' class="display">
-                <p style='margin: 0; padding: 10px; text-align: center;'><strong>Create Transaction</strong></p>
-                <form id = 'transForm'>
-                    <table border=1>
-                        <tr>
-                            <td style="width: 84px">From: </td><td><input type="text" name="sender" placeholder="Sender"></td>
-                        </tr>
-                        <tr>
-                            <td>To: </td><td><input type="text" name="receiver" placeholder="Receiver"></td>
-                        </tr>
-                        <tr>
-                            <td>Amount: </td><td><input type="text" name="amount" placeholder="Amount $$$"></td>
-                        </tr>
-                    </table>
-                    <!--
-					<input class="formButton" type="button" value="Create Transaction" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>
-                    <input class="formButton" type="button" value="Random Transaction" onclick='createTransaction(null, null, null);'>
-					-->
-					<button class="formButton" type="button" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>Create Transaction</button>
-					<button class="formButton" type="button" class="formButton" onclick='createTransaction(null, null, null);'>Random Transaction</button>
-				</form>
+
+			<!-- RIGHT PANE -->
+            <div id="right_pane" class="pane">
+				<h2>Miner Tools</h2>
+				<div id='minerHUD'></div>
+				<div id='transactionHistoryDiv' class="display"><p class='pInTransHistDiv'><strong>Transaction History</strong></p><p class='pInTransHistDiv' id='p1'></p></div>
 			</div>
-
-
-
-
-
-            <!-- The Modal -->
+		
+		
+			
+			
+			<!-- The Modal -->
             <div id="popupVerify" class="modal">
                   <!-- Modal content -->
                 <div class="modal-content">
@@ -188,8 +154,15 @@
                     </div>
                 </div>
             </div>
-
-
+			
+			
+			
+			
+			
+			
+			
+			
+			
         </div>
     </body>
 </html>
