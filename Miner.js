@@ -185,17 +185,17 @@ function Miner(){
 
 		this.trnsContainer.style.paddingTop = "5px";
 		this.trnsContainer.style.background = '#e19f9d';
-		this.trnsContainer.style.borderTopLeftRadius = '10px';
-		this.trnsContainer.style.borderTopRightRadius = '10px';
-		this.trnsContainer.style.width = "80%";
-		this.trnsContainer.style.height = 300-30+6 + 'px';
+		this.trnsContainer.style.marginLeft = 'auto';
+		this.trnsContainer.style.marginRight = 'auto';
+		//this.trnsContainer.style.width = "80%";
+		this.trnsContainer.style.height = 14 + 'em';
 
 		// Verify and Push button, lots of fancy css in styles.css
-		this.verifyButton = document.createElement('button');
-		minerHUD.appendChild(this.verifyButton);
-		this.verifyButton.innerHTML = 'Verify and Push to Blockchain';
-		this.verifyButton.onclick = function(){eval('miners[0].openVerification();')};
-		this.verifyButton.style.width = this.trnsContainer.style.width;
+		// this.verifyButton = document.createElement('button');
+		// minerHUD.appendChild(this.verifyButton);
+		// this.verifyButton.innerHTML = 'Verify and Push to Blockchain';
+		// this.verifyButton.onclick = function(){eval('miners[0].openVerification();')};
+		// this.verifyButton.style.width = this.trnsContainer.style.width;
 
 	};
 

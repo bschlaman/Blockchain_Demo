@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Layout Test</title>
+        <title>BC Visualizer</title>
         <script src="main.js" type="text/javascript"></script>
         <script src="Miner.js" type="text/javascript"></script>
         <script src="Block.js" type="text/javascript"></script>
@@ -76,18 +76,6 @@
             <div id="cBlockchain"><canvas id='canv'></canvas>
 			</div>
 
-			<!-- <br> -->
-			
-			<!-- BUTTONS -->
-			<!-- <br/> -->
-			<!-- <div id="canvButtons"> -->
-				<!-- <button id='addc' class='canvButton' onclick='addDivCanv(true);'>Add Div on Canvas</button> -->
-				<!-- <button id='tst' class='canvButton' onclick='manyDivsCanv(23);'>Add Many Divs</button> -->
-				<!-- <button id='reorg' class='canvButton' onclick='resetAll();'>Reset</button> -->
-				<!-- Trigger/Open The Modal -->
-				<!-- <button id="myBtn">Open Verify</button> -->
-				<!-- <button onclick='eval(coderun)'>Listen</button> -->
-			<!-- </div> -->
 			
 
 			
@@ -124,11 +112,24 @@
 			<!-- RIGHT PANE -->
             <div id="right_pane" class="pane">
 				<h2>Miner Tools</h2>
-				<div id='minerHUD'></div>
+				<div id='minerHUD' class='display'></div>
+				<button id="VP" onclick="function(){eval('miners[0].openVerification();')}">Verify and Push to Blockchain</button>
 				<div id='transactionHistoryDiv' class="display"><p class='pInTransHistDiv'><strong>Transaction History</strong></p><p class='pInTransHistDiv' id='p1'></p></div>
 			</div>
 		
 		
+			<br>
+			
+			<!-- BUTTONS -->
+			<br/>
+			<div id="canvButtons">
+				<button id='addc' class='canvButton' onclick='addDivCanv(true);'>Add Div on Canvas</button>
+				<button id='tst' class='canvButton' onclick='manyDivsCanv(23);'>Add Many Divs</button>
+				<button id='reorg' class='canvButton' onclick='resetAll();'>Reset</button>
+				<!-- Trigger/Open The Modal -->
+				<button id="myBtn">Open Verify</button>
+				<button onclick='eval(coderun)'>Listen</button>
+			</div>
 			
 			
 			<!-- The Modal -->

@@ -22,7 +22,7 @@ canvas {
 }
 #cBlockchain{
 	position: relative;
-    width: 50%;
+    width: 60%;
     outline: 2px solid black;
 	/* width: 795px; */
 	height: 30em;
@@ -30,17 +30,15 @@ canvas {
 	vertical-align: top;
 	overflow-y: scroll;
 	overflow-x: hidden;
-	resize: both;
+	resize: vertical;
 	margin-bottom: 15px;
 }
-#minerHUD{
-	overflow: hidden;
-	display: inline-block;
-}
-#VP{
-	width: 200px;
-}
 
+#VP{
+	width: 80%;
+	font-size:.8em;
+	margin-bottom: .3em;
+}
 
 
 #ledger td:nth-child(2){
@@ -54,11 +52,12 @@ canvas {
 .pInTransHistDiv {margin: 0;}
 .pInTransHistDiv:first-of-type {padding: 10px;}
 .formButton {
-	/*display: inline-block;*/
+	display: inline-block;
+	width: 45%;
 	margin-top: 5px;
-	height:30px;
-	font-size:.8em;
-	padding:0 1em;
+	height: 3em;
+	font-size: .55em;
+	padding: 0 .5em;
 }
 
 #popupVerify{
