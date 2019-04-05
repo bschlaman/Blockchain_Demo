@@ -82,7 +82,7 @@ function bHA(message){
         result += hexWord;
     }
 
-    console.log(tracker);
+    // console.log(tracker);
     return result;
 
 
