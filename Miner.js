@@ -56,7 +56,7 @@ function Miner(){
 			modalTrans.innerHTML += 'Hash of previous block: ' + '#' + prevHash + '<br><br>';
 			this.hashInput += prevHash + '\n';
 
-			modalTrans.innerHTML += 'Appended Hex Guess: ';
+			modalTrans.innerHTML += 'Appended Hex Guess (Nonce): ';
 
 			document.getElementById('popupfooter').innerHTML = 'Run hash to verify transactions and create block.' + '<br>';
 			document.getElementById('popupfooter').innerHTML += 'Rule: Hash must start with "0".'+ '<br>';
@@ -69,7 +69,7 @@ function Miner(){
 
 		}
 	};
-	
+
 	// Need to multiply the reward by some number instead of subtracting here: DONE
 	this.rewardAdded = false;
 	this.addReward = function(){
@@ -106,7 +106,7 @@ function Miner(){
 			//console.log(this.hashInput);
 			var hexGuess = this.randHex(20);
 			var modalTrans = document.getElementById('modalTrans');
-			
+
 			if(this.hashInput[this.hashInput.length-1-20] == '!'){
 				this.hashInput = this.hashInput.substring(0, this.hashInput.length-21);
 				modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-20);

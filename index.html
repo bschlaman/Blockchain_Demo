@@ -17,6 +17,7 @@
         <style>
             body {
 				background: #e8e8e8;
+                margin: 0;
 				font-family: "Ariel", sans-serif;
             }
             #wrapper {
@@ -38,8 +39,7 @@
 				margin-bottom: 1em;
 				vertical-align: top;
 				background-color: lightblue;
-				overflow-y: scroll;
-				<!-- resize: both; -->
+				/* overflow-y: scroll; */
 			}
             #left_pane{
                 outline: 2px solid orange;
@@ -52,7 +52,7 @@
 				<!-- float: right; -->
             }
 			#canvButtons{
-				
+
 				display: inline-block;
 				width: 60%;
 				border: 2px solid purple;
@@ -60,31 +60,31 @@
 				height: 10%;
 				background-color: lightblue;
 			}
-			
-		
+
+
 
         </style>
     </head>
 
     <body>
-	
+
         <div id="wrapper">
-		
+
 
 
 			<!-- Having the buttons inside cBlockchail will cause issues -->
             <div id="cBlockchain"><canvas id='canv'></canvas>
 			</div>
 
-			
 
-			
+
+
 			<!-- LEFT PANE -->
             <div id="left_pane" class="pane">
-			
+
 				<h1>Blockchain Learning Tool</h1>
 				<h2>Coded by Brendan Schlaman</h2>
-			
+
 				<!-- CREATE TRANSACTION -->
 				<div id='formDiv' class="display">
 					<p style='margin: 0; padding: 10px; text-align: center;'><strong>Create Transaction</strong></p>
@@ -100,26 +100,27 @@
 								<td>Amount: </td><td><input type="text" name="amount" placeholder="Amount $$$"></td>
 							</tr>
 						</table>
-						<button class="formButton" type="button" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>Create Transaction</button>
-						<button class="formButton" type="button" class="formButton" onclick='createTransaction(null, null, null);'>Random Transaction</button>
+						<button class="formButton" type="button" onclick='createTransaction(sender.value, receiver.value, amount.value);document.getElementById("transForm").reset();'>Create</button>
+						<button class="formButton" type="button" class="formButton" onclick='createTransaction(null, null, null);'>Random</button>
 					</form>
 				</div>
-			<div id='ledgerdiv' class="display"><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=1></table></div>
+			<div id='ledgerdiv' class="display"><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=2></table></div>
 			</div>
-			
+
 
 
 			<!-- RIGHT PANE -->
             <div id="right_pane" class="pane">
 				<h2>Miner Tools</h2>
-				<div id='minerHUD' class='display'></div>
-				<button id="VP" onclick="function(){eval('miners[0].openVerification();')}">Verify and Push to Blockchain</button>
+				<div id='minerHUD' class='display'>
+                    <button id="VP" onclick="function(){eval('miners[0].openVerification();')}">Verify and Push to Blockchain</button>
+                </div>
 				<div id='transactionHistoryDiv' class="display"><p class='pInTransHistDiv'><strong>Transaction History</strong></p><p class='pInTransHistDiv' id='p1'></p></div>
 			</div>
-		
-		
+
+
 			<br>
-			
+
 			<!-- BUTTONS -->
 			<br/>
 			<div id="canvButtons">
@@ -130,8 +131,8 @@
 				<button id="myBtn">Open Verify</button>
 				<button onclick='eval(coderun)'>Listen</button>
 			</div>
-			
-			
+
+
 			<!-- The Modal -->
             <div id="popupVerify" class="modal">
                   <!-- Modal content -->
@@ -155,15 +156,15 @@
                     </div>
                 </div>
             </div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
+
+
         </div>
     </body>
 </html>

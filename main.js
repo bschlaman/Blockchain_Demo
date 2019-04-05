@@ -186,9 +186,9 @@ function canvasOnload(){
 
     fitToContainer(ctx.canvas);
 
-    setInterval(update, 1000/10);
+    setInterval(canvasUpdate, 1000/10);
 }
-function update(){
+function canvasUpdate(){
     fitToContainer(ctx.canvas);
     reorganizeCanvDivs();
     for(var i = 0 ; i < canvBlocks.length ; i++){
@@ -260,8 +260,11 @@ function getPosition(blkNum){
 currentBlock = null;
 popup = null;
 function trackmouse(event){
-    var mouseX = event.clientX - ctx.canvas.offsetLeft;
-    var mouseY = event.clientY - ctx.canvas.offsetTop + document.getElementById('cBlockchain').scrollTop + window.scrollY;
+    var parentDiv = document.getElementById('cBlockchain');
+    // ctx.canvas.clientLeft/Right should alwasy be 0
+    var mouseX = event.clientX - ctx.canvas.clientLeft - parentDiv.offsetLeft;
+    var mouseY = event.clientY - ctx.canvas.clientTop - parentDiv.offsetTop + parentDiv.scrollTop + window.scrollY;
+
     var b = blockfromCoord(mouseX,mouseY);
     if(canvBlocks[b]){
         var mouseblock = canvBlocks[b];

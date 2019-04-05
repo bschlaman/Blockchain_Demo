@@ -3,3 +3,8 @@ CURRENT ISSUES
 Canvas popup: when popup can't fit high or low, it should prefer low [RESOLVED 3/18]
 Automatic transactions: Transactions getting added to block while modal is up
 Layout: improve this in general
+
+Right pane looks terrible
+Button positioning
+CanvPopUpData no longer works [RESOLVED 4/4]
+Blocks should show Nonce
