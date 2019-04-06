@@ -1,34 +1,31 @@
+body {
+	background: #ffffff;
+	font-family: "Ariel", sans-serif;
+}
+
+#wrapper {
+    text-align: center;
+    white-space: nowrap; 
+
+    outline: 5px solid lightblue;
+}
+
 h1, h2 {
 	text-align: center;
 	text-shadow: 1px 1px #FF0000;
 }
-.display {
-	display: inline-block;
-	width: 80%;
-	overflow: hidden;
-	background-color: #e19f9d;
-	border-radius: 10px;
-	padding: 10px;
-	text-align: left;
-}
 
-input {
-	box-sizing: border-box;
-	width: 100%;
-	/* font-size: 1em; */
-}
 canvas {
 	background-color: black;
 }
-#cBlockchain{
-	position: relative;
-    width: 60%;
-	/* width: 795px; */
+
+.bc {
+    display: inline-block;
 	height: 30em;
 	border: 1px solid red;
-	vertical-align: top;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	resize: vertical;
 }
+
 
