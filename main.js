@@ -225,8 +225,8 @@ canvBlocksPerLine = 0;
 function createBlock(fromTestButton, blockData){
     if(fromTestButton){
         var transactions = [];
-		var hash = randHex(3);
-        var nonce = null;
+		var hash = '0' + randHex(2);
+        var nonce = randHex(nonceLength);
 		for(var i = 0 ; i < blockSize ; i++){
 			var t = genRandomTrans(true);
 			transactions.push(t);

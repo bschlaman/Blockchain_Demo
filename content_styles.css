@@ -32,12 +32,6 @@ canvas {
 	resize: vertical;
 }
 
-#VP{
-	width: 80%;
-	/* font-size:.8em;
-	margin-bottom: .3em; */
-}
-
 #ledger {
 	margin-left: auto;
 	margin-right: auto;
@@ -47,9 +41,22 @@ canvas {
 	text-align: right;
 }
 
+/* Miner Hud */
+#minerHUD {
+	text-align: center;
+}
+#VP{
+	width: 95%;
+	height: auto;
+	padding: .5em;
+	/* font-size:.8em;
+	margin-bottom: .3em; */
+}
+
+/* Transaction History */
 #transactionHistoryDiv {
 	overflow-y: scroll;
-	max-height: 10em;
+	height: 28em;
 	text-align: center;
 }
 .pInTransHistDiv {margin: 0;}

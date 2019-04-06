@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Corruption</title>
+        <script src="main.js" type="text/javascript"></script>
+        <script src="Miner.js" type="text/javascript"></script>
+        <script src="Block.js" type="text/javascript"></script>
+        <script src="Transaction.js" type="text/javascript"></script>
+        <script src="CanvasBlock.js" type="text/javascript"></script>
+        <script src="Arrow.js" type="text/javascript"></script>
+        <script src="CanvPopUpData.js" type="text/javascript"></script>
+        <script src="SHA.js" type="text/javascript"></script>
+        <script src="bHA.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" type="text/css" href="content_styles2.css">
+        <style>
+            body {
+				background: #ffffff;
+                margin: 0;
+				font-family: "Ariel", sans-serif;
+            }
+            #wrapper {
+                text-align: center;
+                white-space: nowrap; 
+
+                outline: 5px solid lightblue;
+            }
+            #cBlockchain, .pane {
+                display: inline-block;
+            }
+            .pane {
+				position: absolute;
+                width: 20%;
+				height: 95%;
+				margin-bottom: 1em;
+				vertical-align: top;
+				background-color: lightblue;
+				overflow-x: hidden;
+			}
+
+        </style>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+
+
+			<!-- Having the buttons inside cBlockchail will cause issues -->
+            <div id="cBlockchain"><canvas id='canv'></canvas>
+			</div>
+            <div id="cBlockchain"><canvas id='canv'></canvas>
+            </div>
+
+
+
+
+        </div>
+    </body>
+</html>

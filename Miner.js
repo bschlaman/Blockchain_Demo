@@ -103,7 +103,7 @@ function Miner(){
 	this.appendGuessandCheck = function(){
 		// This is to prevent buttons being clicked after verification
 		if(!this.verified){
-			var hexGuess = this.randHex(nonceLength);
+			var nonce = randHex(nonceLength);
 			var modalTrans = document.getElementById('modalTrans');
 
 			// Bruh what the hell is going on here haha
@@ -115,8 +115,8 @@ function Miner(){
 				this.hashInput = this.hashInput.substring(0, this.hashInput.length-nonceLength-1);
 				modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-nonceLength-4);
 			}
-			this.hashInput += '!' + hexGuess;
-			modalTrans.innerHTML += '<br>' + hexGuess;
+			this.hashInput += '!' + nonce;
+			modalTrans.innerHTML += '<br>' + nonce;
 
 			var resP = document.getElementById('result');
 			var result = bHA(this.hashInput);
@@ -129,7 +129,7 @@ function Miner(){
 				this.verified = true;
 				this.rewardAdded = false;
 				numVerify++;
-				this.pushTransactionsToBlockchain(result);
+				this.pushTransactionsToBlockchain(result, nonce);
 			}
 		}
 	};
@@ -141,17 +141,8 @@ function Miner(){
 		else{return false;}
 	};
 
-	// This function already exists elsewhere, can I find a way to delete it?
-	this.randHex = function(n){
-		var s = ''
-		for(var i = 0 ; i < n ; i++){
-			s += [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)];
-		}
-		return s;
-	}
-
 	// What is handling where the # is?  Create a consistent system for the # of hashes that makes sense
-	this.pushTransactionsToBlockchain = function(hash){
+	this.pushTransactionsToBlockchain = function(hash, nonce){
 
 		// Miner no longer creates block, but might in the future
 		//var completedBlock = new Block(this.capturedTransactions.slice(0), hash, nonce, centBlockchain.length);
@@ -184,7 +175,6 @@ function Miner(){
 		header.style.textAlign = "center";
 		this.trnsContainer.appendChild(header);
 
-		this.trnsContainer.style.paddingTop = "5px";
 		this.trnsContainer.style.background = '#e19f9d';
 		this.trnsContainer.style.marginLeft = 'auto';
 		this.trnsContainer.style.marginRight = 'auto';
