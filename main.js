@@ -240,7 +240,8 @@ function createBlock(fromTestButton, blockData){
     }
 	centBlockchain.push(new Block(transactions, hash, nonce, centBlockchain.length));
     // Running reorganizeCanvDivs() to give new CanvasBlock initial position
-    reorganizeCanvDivs();
+    // Removed this since it was causing blinking effect and this function is run continually anyways
+    // reorganizeCanvDivs();
 	updateLedger();
     updateScroll();
 }
