@@ -16,6 +16,7 @@ window.onload=function(){
 	miningReward = 200;
 	rewardDRate = 0.9;
 	numVerify = 0;
+	nonceLength = 12;
 
     // Create initial Miner
     miners.push(new Miner());
@@ -212,8 +213,6 @@ function canvasUpdate(){
 function fitToContainer(canvas){
     parentDiv = document.getElementById('cBlockchain');
     ctx.canvas.width  = parentDiv.clientWidth;
-    //ctx.canvas.height = parentDiv.clientHeight;
-	//console.log(canvas.height, parentDiv.clientHeight);
 }
 
 

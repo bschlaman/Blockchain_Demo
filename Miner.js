@@ -103,16 +103,20 @@ function Miner(){
 	this.appendGuessandCheck = function(){
 		// This is to prevent buttons being clicked after verification
 		if(!this.verified){
-			//console.log(this.hashInput);
-			var hexGuess = this.randHex(20);
+			var hexGuess = this.randHex(nonceLength);
 			var modalTrans = document.getElementById('modalTrans');
 
-			if(this.hashInput[this.hashInput.length-1-20] == '!'){
-				this.hashInput = this.hashInput.substring(0, this.hashInput.length-21);
-				modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-20);
+			// Bruh what the hell is going on here haha
+			// This first if statement checks if append has already been run at least once.
+			// If so, it simply takes off the old hash from hashInput and modalTrans
+			// Note: hashInput substring is one less to accound for the '!'
+			// Note: modalTrans substring is 5 less to accound for the '<br>'
+			if(this.hashInput[this.hashInput.length-nonceLength-1] == '!'){
+				this.hashInput = this.hashInput.substring(0, this.hashInput.length-nonceLength-1);
+				modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-nonceLength-4);
 			}
 			this.hashInput += '!' + hexGuess;
-			modalTrans.innerHTML += hexGuess;
+			modalTrans.innerHTML += '<br>' + hexGuess;
 
 			var resP = document.getElementById('result');
 			var result = bHA(this.hashInput);
