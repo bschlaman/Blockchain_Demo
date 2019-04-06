@@ -1,16 +1,10 @@
-function Block(transactions, hash, num){
+function Block(transactions, hash, nonce, num){
 
-    this.blockID = null;
     this.num = num;
 	this.hash = hash;
-	if(this.hash == 'inherit'){
-		this.hash = canvBlocks[num].hash;
-	}
+    this.nonce = nonce;
     this.transactions = transactions;
-    this.show = function(){
-
-
-    }
+    this.canvBlock = new CanvasBlock(this.hash, this.nonce, this.num);
 
     this.pushTransaction = function(transaction){
         this.transactions.push(transaction);

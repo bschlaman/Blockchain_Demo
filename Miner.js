@@ -149,15 +149,12 @@ function Miner(){
 	// What is handling where the # is?  Create a consistent system for the # of hashes that makes sense
 	this.pushTransactionsToBlockchain = function(hash){
 
-		// Miner creates block for now, this may change
-		var completedBlock = new Block(this.capturedTransactions.slice(0), hash);
+		// Miner no longer creates block, but might in the future
+		//var completedBlock = new Block(this.capturedTransactions.slice(0), hash, nonce, centBlockchain.length);
 
-		// Push to blockchain
-		centBlockchain.push(completedBlock);
-		addDivCanv(false, hash);
-
-		// Updates master ledger.  This should not be the job of the miner, this will change
-		updateLedger();
+		// Push to blockchain is done by createBlock()
+		//centBlockchain.push(completedBlock);
+		createBlock(false, {transactions: this.capturedTransactions.slice(0), hash: hash, nonce: nonce});
 
 		// Clear out transaction display
 		while(this.trnsContainer.childNodes[1]){

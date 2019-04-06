@@ -98,6 +98,14 @@ function genRandomTrans(fromTestButton){
 	else{createTransaction(name1, name2, amt);}
 }
 
+function randHex(n){
+    var s = ''
+    for(var i = 0 ; i < n ; i++){
+        s += [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)];
+    }
+    return s;
+}
+
 function tableCreate() {
 	var tbl = document.getElementById('ledger');
 	var tbdy = document.createElement('tbody');
@@ -178,7 +186,7 @@ function modalCreate(){
 }
 
 
-// Canvas Functions
+// CANVAS FUNCTIONS
 function canvasOnload(){
     ctx = document.getElementById('canv').getContext("2d");
     ctx.canvas.addEventListener('mousemove', function(event){trackmouse(event)});
@@ -188,17 +196,19 @@ function canvasOnload(){
 
     setInterval(canvasUpdate, 1000/10);
 }
+
 function canvasUpdate(){
     fitToContainer(ctx.canvas);
     reorganizeCanvDivs();
-    for(var i = 0 ; i < canvBlocks.length ; i++){
-        canvBlocks[i].show();
-		canvBlocks[i].showArrow();
+    for(var i = 0 ; i < centBlockchain.length ; i++){
+        centBlockchain[i].canvBlock.show();
+		centBlockchain[i].canvBlock.showArrow();
     }
     if(popup){popup.show();}
 
     //miners[0].updateTransDiv(ctx.canvas.clientX + ctx.canvas.width, ctx.canvas.clientY);
 }
+
 function fitToContainer(canvas){
     parentDiv = document.getElementById('cBlockchain');
     ctx.canvas.width  = parentDiv.clientWidth;
@@ -207,39 +217,51 @@ function fitToContainer(canvas){
 }
 
 
-canvBlocks = [];
+// canvBlocks = [];
 canvBlockWidth = 120;
 canvBlockHeight = 120;
 canvBlockMargin = 20;
 canvBlocksPerLine = 0;
 
-function addDivCanv(fromTestButton, hash){
-    var pos = getPosition(canvBlocks.length);
-    canvBlocks.push(new CanvasBlock(pos.x, pos.y, canvBlocks.length, hash));
-	if(fromTestButton){
-		faketrns = []
+function createBlock(fromTestButton, blockData){
+    if(fromTestButton){
+        var transactions = [];
+		var hash = randHex(3);
+        var nonce = null;
 		for(var i = 0 ; i < blockSize ; i++){
 			var t = genRandomTrans(true);
-			faketrns.push(t);
+			transactions.push(t);
 			allTransactions.push(t);
 		}
-		// Fix the logic to get hash from buttons, not inherit
-		centBlockchain.push(new Block(faketrns, 'inherit', canvBlocks.length-1));
-		updateLedger();
 	}
+    else {
+        var transactions = blockData.transactions;
+        var hash = blockData.hash;
+        var nonce = blockData.nonce;
+    }
+	centBlockchain.push(new Block(transactions, hash, nonce, centBlockchain.length));
+    // Running reorganizeCanvDivs() to give new CanvasBlock initial position
+    reorganizeCanvDivs();
+	updateLedger();
     updateScroll();
+}
+
+function manyCreateBlock(x){
+    for (var i = 0 ; i <x ; i++){
+        createBlock(true);
+    }
 }
 
 function reorganizeCanvDivs(){
 
     canvBlocksPerLine = Math.floor(ctx.canvas.width/canvBlockWidth);
-    for(var i = 0 ; i < canvBlocks.length; i++){
-        canvBlocks[i].updatePosition(getPosition(i));
+    for(var i = 0 ; i < centBlockchain.length; i++){
+        centBlockchain[i].canvBlock.updatePosition(getPosition(i));
     }
 
     // Also update the height of the canvas
     var div = document.getElementById('cBlockchain');
-    var cols = Math.ceil(canvBlocks.length/canvBlocksPerLine);
+    var cols = Math.ceil(centBlockchain.length/canvBlocksPerLine);
     if(cols * canvBlockHeight > div.clientHeight){
         ctx.canvas.height = cols * canvBlockHeight;
     }
@@ -257,6 +279,7 @@ function getPosition(blkNum){
     return {x: w, y: h};
 }
 
+// Could also have this be currentCanvBlock
 currentBlock = null;
 popup = null;
 function trackmouse(event){
@@ -266,11 +289,11 @@ function trackmouse(event){
     var mouseY = event.clientY - ctx.canvas.clientTop - parentDiv.offsetTop + parentDiv.scrollTop + window.scrollY;
 
     var b = blockfromCoord(mouseX,mouseY);
-    if(canvBlocks[b]){
-        var mouseblock = canvBlocks[b];
+    if(centBlockchain[b]){
+        var mouseblock = centBlockchain[b];
         if(mouseblock != currentBlock){
             currentBlock = mouseblock;
-            popup = new CanvPopUpData(mouseX, mouseY, b, currentBlock.color);
+            popup = new CanvPopUpData(mouseX, mouseY, b, currentBlock.canvBlock.color);
         }
         if(popup){
             popup.updatePosition({x: mouseX, y: mouseY});
@@ -291,14 +314,9 @@ function blockfromCoord(x,y){
     return row%2 == 0 ? (col + row*canvBlocksPerLine):((row+1)*canvBlocksPerLine-1-col);
 }
 
-function manyDivsCanv(x){
-    for (var i = 0 ; i <x ; i++){
-        addDivCanv(true);
-    }
-}
 
 function resetAll(){
-    canvBlocks = [];
+    // canvBlocks = [];
 	centBlockchain = [];
 	allTransactions = [];
 
@@ -319,3 +337,4 @@ function updateScroll(){
     var element = document.getElementById('cBlockchain');
     element.scrollTop = element.scrollHeight;
 }
+

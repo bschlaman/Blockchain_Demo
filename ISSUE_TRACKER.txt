@@ -8,3 +8,11 @@ Right pane looks terrible
 Button positioning
 CanvPopUpData no longer works [RESOLVED 4/4]
 Blocks should show Nonce
+
+MouseTracker slightly off, hitbox biase up and left
+
+Each Block object should have a canvas block
+
+Miner should really "build" the block and then "broadcast" it.
+Right now, since I need there to be a global createBlock() function
+I will have the miner simply call that function

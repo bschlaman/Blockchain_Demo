@@ -1,18 +1,10 @@
-function CanvasBlock(posX, posY, num, hash){
+function CanvasBlock(hash, nonce, num){
+    this.hash = hash;
+    this.num = num;
     this.margins = canvBlockMargin;
     this.width = canvBlockWidth-2*this.margins;
     this.height = canvBlockHeight-2*this.margins;
-    this.x = posX;
-    this.y = posY;
-	
-	this.randHex = function(n){
-		var s = ''
-		for(var i = 0 ; i < n ; i++){
-			s += [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)];
-		}
-		return s;
-	}
-	this.hash = hash ? hash : this.randHex(3);
+	// I just like the wayt his looks: this.hash = hash ? hash : randHex(3);
     this.arrowFromPrev = new Arrow({x: null},{y: null});
     this.color = {
         r: Math.random() * 255,
@@ -41,7 +33,7 @@ function CanvasBlock(posX, posY, num, hash){
         ctx.fillRect(this.x+this.margins, this.y+this.margins, this.width, this.height/2);
         ctx.fillStyle = 'rgb('+(this.color.r+100)+', '+(this.color.g+100)+', '+(this.color.b+100)+')';
 		ctx.font = "15px Arial";
-		ctx.fillText('Block '+num, this.x+(this.width/2)+this.margins, this.y+(this.height/4)+this.margins);
+		ctx.fillText('Block '+this.num, this.x+(this.width/2)+this.margins, this.y+(this.height/4)+this.margins);
 
 		// Bottom Half
 		ctx.fillStyle = 'rgb('+(this.color.r+25)+', '+(this.color.g-25)+', '+(this.color.b-25)+')';
@@ -85,6 +77,5 @@ function CanvasBlock(posX, posY, num, hash){
         }
         this.arrowFromPrev.setStartEnd(start, end);
     }
-	
 
 }
