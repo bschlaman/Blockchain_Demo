@@ -11,7 +11,7 @@ body {
 }
 
 h1, h2 {
-	text-align: center;
+	/*text-align: center;*/
 	text-shadow: 1px 1px #FF0000;
 }
 
@@ -20,7 +20,7 @@ canvas {
 }
 
 .bc {
-    display: inline-block;
+    display: block;
 	height: 30em;
 	border: 1px solid red;
 	overflow-y: scroll;

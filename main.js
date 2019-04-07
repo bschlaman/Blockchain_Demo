@@ -189,7 +189,7 @@ function modalCreate(){
 
 // CANVAS FUNCTIONS
 function canvasOnload(){
-    ctx = document.getElementById('canv').getContext("2d");
+    ctx = document.getElementById('canv1').getContext("2d");
     ctx.canvas.addEventListener('mousemove', function(event){trackmouse(event)});
     origCanvHeight = parseInt(document.getElementById('cBlockchain').clientHeight);
 
