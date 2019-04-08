@@ -163,7 +163,7 @@ function updateLedger(){
 
 function modalCreate(){
     var modal = document.getElementById('popupVerify');
-    var btn = document.getElementById("myBtn");
+    //var btn = document.getElementById("myBtn");
 
     document.getElementById('appendcheck').onclick = function(){eval('miners[0].appendGuessandCheck();')};
 	document.getElementById('addreward').onclick = function(){eval('miners[0].addReward();')};
@@ -171,9 +171,9 @@ function modalCreate(){
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
+    //btn.onclick = function() {
+    //    modal.style.display = "block";
+    //}
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
@@ -240,7 +240,8 @@ function createBlock(fromTestButton, blockData){
     }
 	centBlockchain.push(new Block(transactions, hash, nonce, centBlockchain.length));
     // Running reorganizeCanvDivs() to give new CanvasBlock initial position
-    reorganizeCanvDivs();
+    // Removed this since it was causing blinking effect and this function is run continually anyways
+    // reorganizeCanvDivs();
 	updateLedger();
     updateScroll();
 }

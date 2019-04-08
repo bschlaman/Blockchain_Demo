@@ -10,7 +10,6 @@
         <script src="CanvasBlock.js" type="text/javascript"></script>
         <script src="Arrow.js" type="text/javascript"></script>
         <script src="CanvPopUpData.js" type="text/javascript"></script>
-        <script src="SHA.js" type="text/javascript"></script>
         <script src="bHA.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" type="text/css" href="content_styles.css">
@@ -80,8 +79,9 @@
 			<!-- LEFT PANE -->
             <div id="left_pane" class="pane">
 
-				<h1>Blockchain Learning Tool</h1>
-				<h2>Coded by Brendan Schlaman</h2>
+				<h1 class='title'>Blockchain Learning Tool</h1>
+				<h2 class='title'>(Proof of Work)</h2>
+				<h3 class='title'>Coded by Brendan Schlaman</h3>
 
 				<!-- CREATE TRANSACTION -->
 				<div id='formDiv' class="display">
@@ -140,9 +140,9 @@
                         <h2>Run Hash on Transactions</h2>
                     </div>
                     <div class="modal-body">
-                        <p>Transaction Data:</p>
-                        <p id='modalTrans'></p>
-                        <p id='resultTitle' class='hashresult'>Result:</p>
+                        <p><strong>Transaction Data:</strong></p>
+                        <div><p id='modalTrans'></p></div>
+                        <strong><p id='resultTitle' class='hashresult'></p></strong>
                         <p id='result' class='hashresult'></p>
                     </div>
                     <div class="modal-footer">
