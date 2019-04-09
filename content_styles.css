@@ -75,11 +75,32 @@ canvas {
 #popupVerify{
 	text-align: left;
 }
+#mBodyWrapper{
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+.mBody{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 1em;
+}
 #modalTrans{
-	margin-left: 15px;
-	width: 20em;
 	padding: 5px;
+	width: 18em;
 	background: #ff6666;
+	font-size: 1em;
+	/* Height to avoid p increasing in size */
+	height: 13em;
+}
+.modalText{
+	width: auto;
+	background: #ffffff;
+	margin-bottom: 0;
+	/* border: 2px solid red; */
+	font-size: 1.2em;
+}
+#found{
+	color: red;
 }
 .hashresult{
 	display: inline;
@@ -88,4 +109,7 @@ canvas {
 	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
 	/*-webkit-text-stroke-width: 1px;
 	-webkit-text-stroke-color: black;*/
+}
+.mButton{
+	margin: 1em;
 }

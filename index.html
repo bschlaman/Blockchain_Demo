@@ -140,16 +140,25 @@
                         <h2>Run Hash on Transactions</h2>
                     </div>
                     <div class="modal-body">
-                        <p><strong>Transaction Data:</strong></p>
-                        <div><p id='modalTrans'></p></div>
+                        <p><strong>Block Data:</strong></p>
+                        <div id='mBodyWrapper'>
+                        	<div class='mBody'>
+                        		<p id='modalTrans'></p>
+                        	</div>
+                        	<div class='mBody'>
+                        		<p class='modalText'>Run hash to verify transactions and create block.</p>
+                        		<p class='modalText'>Rule: Hash must start with "0".</p>
+                        		<strong><p id='found' class='modalText'></p></strong>
+                        	</div>
+                        </div>
                         <strong><p id='resultTitle' class='hashresult'></p></strong>
                         <p id='result' class='hashresult'></p>
                     </div>
                     <div class="modal-footer">
-                        <h3 id='popupfooter'>Modal Footer</h3>
-                        <button id='appendcheck'>Append Guess and Check Hash</button>
-                        <button id='addreward'>Add Reward for Mining</button>
-                        <button id='runhash'>Speed Run Hash</button>
+                       <!-- <h3 id='popupfooter'>Modal Footer</h3> -->
+                        <button id='appendcheck' class='mButton'>Append Guess and Check Hash</button>
+                        <button id='addreward' class='mButton'>Add Reward for Mining</button>
+                        <button id='runhash' class='mButton'>Speed Run Hash</button>
 
                     </div>
                 </div>

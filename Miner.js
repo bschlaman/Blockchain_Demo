@@ -40,11 +40,11 @@ function Miner(){
 			popup.style.display = "block";
 			// Make this a better name
 			var modalTrans = document.getElementById('modalTrans');
-			modalTrans.innerHTML = '';
+			modalTrans.innerHTML = 'Captured Transactions:<br>';
 			this.hashInput = '';
 
 			for(var i = 0 ; i < this.capturedTransactions.length ; i++){
-				modalTrans.innerHTML += this.capturedTransactions[i].string()+'<br>';
+				modalTrans.innerHTML += '&nbsp &nbsp &nbsp' + this.capturedTransactions[i].string()+'<br>';
 			}
 			modalTrans.innerHTML += '<br><br>';
 
@@ -58,8 +58,8 @@ function Miner(){
 
 			modalTrans.innerHTML += 'Appended Hex Guess (Nonce):<br>';
 
-			document.getElementById('popupfooter').innerHTML = 'Run hash to verify transactions and create block.' + '<br>';
-			document.getElementById('popupfooter').innerHTML += 'Rule: Hash must start with "0".'+ '<br>';
+			//document.getElementById('modalText').innerHTML = 'Run hash to verify transactions and create block.' + '<br>';
+			//document.getElementById('modalText').innerHTML += 'Rule: Hash must start with "0".'+ '<br>';
 			document.getElementById('resultTitle').innerHTML = 'Resultant Hash: ';
 			document.getElementById('result').innerHTML = '';
 
@@ -77,7 +77,8 @@ function Miner(){
 			var modalTrans = document.getElementById('modalTrans');
 			// Subtract 8 for <br><br>
 			var i = modalTrans.innerHTML.indexOf('Hash') - 8;
-			modalTrans.innerHTML = modalTrans.innerHTML.slice(0, i) + '<strong>-\> Brendan : ' + miningReward + '</strong>' + modalTrans.innerHTML.slice(i);
+			modalTrans.innerHTML = modalTrans.innerHTML.slice(0, i)
+				+ '&nbsp &nbsp &nbsp' + '<strong>-\> Brendan : ' + miningReward + '</strong>' + modalTrans.innerHTML.slice(i);
 			p1.innerHTML += 'Brendan received ' + miningReward + ' from mining<br>';
 			this.capturedTransactions.push(new Transaction('', 'Brendan', miningReward));
 			this.rewardAdded = true;
@@ -126,7 +127,7 @@ function Miner(){
 
 			if(this.verifyHash(result)){
 				this.hashOn = false;
-				document.getElementById('popupfooter').innerHTML += '***Hash Found! Block is pushed to Blockchain.***';
+				document.getElementById('found').innerHTML = '***Hash Found! Block has been broadcasted.***';
 				this.verified = true;
 				this.rewardAdded = false;
 				numVerify++;
