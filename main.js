@@ -338,3 +338,14 @@ function updateScroll(){
     element.scrollTop = element.scrollHeight;
 }
 
+//
+function hasReward(block){
+	var reward = false;
+	for(var i = 0 ; i < block.transactions.length ; i++){
+		if(block.transactions[i].s == ''){
+			reward = true;
+		}
+	}
+	return reward;
+}
+

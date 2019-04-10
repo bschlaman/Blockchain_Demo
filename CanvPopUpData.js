@@ -1,6 +1,6 @@
 function CanvPopUpData(posX, posY, num, color){
     this.width = canvBlockWidth + 100;
-    this.height = canvBlockHeight + 100;
+    this.height = canvBlockHeight + 100 + (hasReward(centBlockchain[num]) ? 22 : 0);
     this.x = posX;
     this.y = posY;
     this.mouseoffset = 10;
@@ -30,12 +30,10 @@ function CanvPopUpData(posX, posY, num, color){
         ctx.font = "20px Arial";
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        //ctx.fillText('Data for ' + num, this.x+(this.width/2)+this.mouseoffset, this.y+(this.height/2)+this.mouseoffset);
 
-		if(centBlockchain[num-1]){
-			ctx.fillText('Hash of', xpos+(this.width/2), ypos+(20));
-			ctx.fillText('Previous Block: ' + '#' + centBlockchain[num-1].hash, xpos+(this.width/2), ypos+(40));
-		}
+		ctx.fillText('Hash of', xpos+(this.width/2), ypos+(20));
+		ctx.fillText('Previous Block: ' + '#' + (centBlockchain[num-1] ? centBlockchain[num-1].hash : 'NULL'), xpos+(this.width/2), ypos+(40));
+
 		ctx.fillStyle = 'rgb('+(this.color.r+150)+', '+(this.color.g+150)+', '+(this.color.b+150)+')';
 		// This is declared outside so that it can be used to show nonce in the right place
 		var i;

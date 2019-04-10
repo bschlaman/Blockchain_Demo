@@ -9,7 +9,5 @@ function Block(transactions, hash, nonce, num){
 
     this.pushTransaction = function(transaction){
         this.transactions.push(transaction);
-
-
     }
 }
