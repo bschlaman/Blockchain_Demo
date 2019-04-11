@@ -35,6 +35,7 @@ function Miner(){
 
 			// Eventually, this should be somewhere else so you can close the modal and everything still be there
 			this.verified = false;
+			document.getElementById('found').innerHTML = "";
 
 			var popup = document.getElementById('popupVerify');
 			popup.style.display = "block";
