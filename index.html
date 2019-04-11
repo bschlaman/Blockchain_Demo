@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" type="text/css" href="content_styles.css">
         <style>
+            html {height: 100%}
             body {
 				background: #e8e8e8;
                 margin: 0;
@@ -26,7 +27,7 @@
                 text-align: center;
                 /* white-space: nowrap; */
 
-                outline: 2px solid lightblue;
+                /*outline: 2px solid lightblue;*/
             }
             #cBlockchain, .pane {
                 display: inline-block;
@@ -34,28 +35,36 @@
             .pane {
 				position: absolute;
                 width: 20%;
-				height: 95%;
-				margin-bottom: 1em;
+				height: 100%;
+				margin-bottom: 0;
 				vertical-align: top;
-				background-color: lightblue;
+				background-color: #d0c9f2;
 				overflow-x: hidden;
 			}
             #left_pane{
-                outline: 2px solid orange;
+                /*outline: 2px solid orange;*/
                 left: 0;
             }
             #right_pane{
-                outline: 2px solid red;
+                /*outline: 2px solid red;*/
 				right: 0;
             }
 			#canvButtons{
-
-				display: inline-block;
-				width: 60%;
-				border: 2px solid purple;
-
+                position: absolute;
+                bottom: 0;
+				left: 0;
+                right: 0;
+                margin-left: auto;
+                margin-right: auto;
+				width: 62%;
 				height: 10%;
-				background-color: lightblue;
+
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-evenly;
+
+				background-color: #d0c9f2;
+				/*border: 2px solid purple;*/
 			}
 
 
@@ -72,7 +81,6 @@
 			<!-- Having the buttons inside cBlockchail will cause issues -->
             <div id="cBlockchain"><canvas id='canv'></canvas>
 			</div>
-
 
 
 
@@ -102,7 +110,7 @@
 						<button class="formButton" type="button" class="formButton" onclick='createTransaction(null, null, null);'>Random</button>
 					</form>
 				</div>
-			<div id='ledgerdiv' class="display"><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=2></table></div>
+			<div id='ledgerdiv' class="display"><p style='margin: 0; padding: 10px; text-align: center;'><strong>Master Ledger</strong></p><table id='ledger' border=2></table><br>***There will only ever be 15853 credits!</div>
 			</div>
 
 
