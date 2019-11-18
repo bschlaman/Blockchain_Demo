@@ -1,10 +1,8 @@
 
-
-
-
-
 window.onload=function(){
 
+    // Workaround for weird resizing issue
+    document.getElementById("cBlockchain").style.height = (0.9 * window.innerHeight) + 'px';
     // Declare global vaiables
     p1=document.getElementById("p1");
     centBlockchain = [];
