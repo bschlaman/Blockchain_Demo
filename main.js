@@ -4,6 +4,7 @@ window.onload=function(){
     // Workaround for weird resizing issue
     document.getElementById("cBlockchain").style.height = (0.9 * window.innerHeight) + 'px';
     // Declare global vaiables
+    refreshRate = 1000/10;
     p1=document.getElementById("p1");
     centBlockchain = [];
     allTransactions = [];
@@ -220,7 +221,7 @@ function canvasOnload(){
 
     fitToContainer(ctx.canvas);
 
-    setInterval(canvasUpdate, 1000/10);
+    setInterval(canvasUpdate, refreshRate);
 }
 
 function canvasUpdate(){
@@ -270,7 +271,8 @@ function createBlock(fromTestButton, blockData){
     // reorganizeCanvDivs();
     pendingTransactions = [];
 	updateLedger();
-    updateScroll();
+    // Setting to the refresh rate so that scroll is updated after reorganizeCanvDivs() has been run once
+    setTimeout(updateScroll, refreshRate);
 }
 
 function manyCreateBlock(x){
