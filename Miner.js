@@ -193,7 +193,7 @@ function Miner(){
 
 	};
 
-	//this.displayTransDiv();
+	this.displayTransDiv();
 
 	// this.updateTransDiv = function(canvPosX, canvPosY){
 	// 	var td = document.getElementById('minerHUD');
