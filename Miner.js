@@ -35,18 +35,19 @@ function Miner(){
 
 			// Eventually, this should be somewhere else so you can close the modal and everything still be there
 			this.verified = false;
+			document.getElementById('found').innerHTML = "";
 
 			var popup = document.getElementById('popupVerify');
 			popup.style.display = "block";
 			// Make this a better name
 			var modalTrans = document.getElementById('modalTrans');
-			modalTrans.innerHTML = '';
+			modalTrans.innerHTML = 'Captured Transactions:<br>';
 			this.hashInput = '';
 
 			for(var i = 0 ; i < this.capturedTransactions.length ; i++){
-				modalTrans.innerHTML += this.capturedTransactions[i].string()+'<br>';
+				modalTrans.innerHTML += '&nbsp &nbsp &nbsp' + this.capturedTransactions[i].string()+'<br>';
 			}
-			modalTrans.innerHTML += '<br>';
+			modalTrans.innerHTML += '<br><br>';
 
 			var prevHash = 'NULL';
 			// A.k.a if central blockchain is bigger than size 1
@@ -56,10 +57,10 @@ function Miner(){
 			modalTrans.innerHTML += 'Hash of previous block: ' + '#' + prevHash + '<br><br>';
 			this.hashInput += prevHash + '\n';
 
-			modalTrans.innerHTML += 'Appended Hex Guess (Nonce): ';
+			modalTrans.innerHTML += 'Appended Hex Guess (Nonce):<br>';
 
-			document.getElementById('popupfooter').innerHTML = 'Run hash to verify transactions and create block.' + '<br>';
-			document.getElementById('popupfooter').innerHTML += 'Rule: Hash must start with "0".'+ '<br>';
+			//document.getElementById('modalText').innerHTML = 'Run hash to verify transactions and create block.' + '<br>';
+			//document.getElementById('modalText').innerHTML += 'Rule: Hash must start with "0".'+ '<br>';
 			document.getElementById('resultTitle').innerHTML = 'Resultant Hash: ';
 			document.getElementById('result').innerHTML = '';
 
@@ -75,8 +76,10 @@ function Miner(){
 	this.addReward = function(){
 		if(!this.rewardAdded && !this.verified){
 			var modalTrans = document.getElementById('modalTrans');
-			var i = modalTrans.innerHTML.indexOf('Hash') - 4;
-			modalTrans.innerHTML = modalTrans.innerHTML.slice(0, i) + '-\> Brendan : ' + miningReward + '<br>' + modalTrans.innerHTML.slice(i);
+			// Subtract 8 for <br><br>
+			var i = modalTrans.innerHTML.indexOf('Hash') - 8;
+			modalTrans.innerHTML = modalTrans.innerHTML.slice(0, i)
+				+ '&nbsp &nbsp &nbsp' + '<strong>-\> Brendan : ' + miningReward + '</strong>' + modalTrans.innerHTML.slice(i);
 			p1.innerHTML += 'Brendan received ' + miningReward + ' from mining<br>';
 			this.capturedTransactions.push(new Transaction('', 'Brendan', miningReward));
 			this.rewardAdded = true;
@@ -113,10 +116,10 @@ function Miner(){
 			// Note: modalTrans substring is 5 less to accound for the '<br>'
 			if(this.hashInput[this.hashInput.length-nonceLength-1] == '!'){
 				this.hashInput = this.hashInput.substring(0, this.hashInput.length-nonceLength-1);
-				modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-nonceLength-4);
+				modalTrans.innerHTML = modalTrans.innerHTML.substring(0, modalTrans.innerHTML.length-nonceLength);
 			}
 			this.hashInput += '!' + nonce;
-			modalTrans.innerHTML += '<br>' + nonce;
+			modalTrans.innerHTML += nonce;
 
 			var resP = document.getElementById('result');
 			var result = bHA(this.hashInput);
@@ -125,7 +128,7 @@ function Miner(){
 
 			if(this.verifyHash(result)){
 				this.hashOn = false;
-				document.getElementById('popupfooter').innerHTML += 'Hash Found! Block is pushed to Blockchain.';
+				document.getElementById('found').innerHTML = '***Hash Found! Block has been broadcasted.***';
 				this.verified = true;
 				this.rewardAdded = false;
 				numVerify++;

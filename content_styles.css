@@ -1,4 +1,4 @@
-h1, h2 {
+.title {
 	text-align: center;
 	text-shadow: 1px 1px #FF0000;
 }
@@ -21,11 +21,12 @@ canvas {
 	background-color: black;
 }
 #cBlockchain{
-	position: relative;
+	/*position: relative;*/
     width: 60%;
 	/* width: 795px; */
-	height: 30em;
-	border: 3px solid red;
+	height: 20em;
+
+	/*border: 3px solid red;*/
 	vertical-align: top;
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -61,6 +62,9 @@ canvas {
 }
 .pInTransHistDiv {margin: 0;}
 .pInTransHistDiv:first-of-type {padding: 10px;}
+#p1 {
+	font-size: .8em;
+}
 
 .formButton {
 	display: inline-block;
@@ -75,18 +79,46 @@ canvas {
 #popupVerify{
 	text-align: left;
 }
+#mBodyWrapper{
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+.mBody{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 1em;
+}
 #modalTrans{
-	margin-left: 15px;
-	width: 500px;
 	padding: 5px;
+	width: 18em;
 	background: #ff6666;
+	font-size: 1em;
+	/* Height to avoid p increasing in size */
+	height: 13em;
+}
+.modalText{
+	width: auto;
+	background: #ffffff;
+	margin-bottom: 0;
+	/* border: 2px solid red; */
+	font-size: 1.2em;
+}
+#found{
+	color: red;
 }
 .hashresult{
 	display: inline;
 }
 #popupfooter {
-	color: black;
 	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
-	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: black;
+	/*-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: black;*/
+}
+.mButton{
+	margin: 1em;
+}
+
+
+.pane::-webkit-scrollbar, #transactionHistoryDiv::-webkit-scrollbar {
+  display: none;
 }

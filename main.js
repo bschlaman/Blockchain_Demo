@@ -1,14 +1,13 @@
 
-
-
-
-
 window.onload=function(){
 
+    // Workaround for weird resizing issue
+    document.getElementById("cBlockchain").style.height = (0.9 * window.innerHeight) + 'px';
     // Declare global vaiables
     p1=document.getElementById("p1");
     centBlockchain = [];
     allTransactions = [];
+    pendingTransactions =[];
     miners = [];
 	blockSize = 4;
     names = ["Brendan","Jason","Lauren","Kirsten","Mike","Bailey","Christa","Mark","Ralph","Judy","Julie","Bob","Alice","Charlie"];
@@ -86,10 +85,14 @@ function updatecentBlockchain(){
 
 function genRandomTrans(fromTestButton){
     var name1 = names[Math.floor(Math.random() * names.length)];
+    var amt = Math.floor(Math.random() * 1000);
+    // If name1 cannot give amt, try new name1 and amt
+    while(amt > parseCredits(name1)){
+        name1 = names[Math.floor(Math.random() * names.length)];
+        amt = Math.floor(Math.random() * 1000);
+    }
     var name2 = names[Math.floor(Math.random() * names.length)];
     while(name1==name2){name2 = names[Math.floor(Math.random() * names.length)];}
-    var amt = Math.floor(Math.random() * 1000);
-
 
 	// This logic helps the test button.  Should just be createTransaction(name1, name2, amt); when done testing
 	if(fromTestButton){
@@ -161,9 +164,31 @@ function updateLedger(){
 
 }
 
+// Takes a name and gives credits + pending transactions + miner transactions
+function parseCredits(name){
+    var tbl = document.getElementById('ledger');
+    var credits = null;
+    for(var i = 0 ; i < tbl.firstChild.childNodes.length ; i++){
+        if(tbl.firstChild.childNodes[i].childNodes[0].innerHTML == name){
+            credits = parseInt(tbl.firstChild.childNodes[i].childNodes[1].innerHTML);
+        }
+    }
+    for(var j = 0 ; j < pendingTransactions.length ; j++){
+        if(pendingTransactions[j].s == name){
+            credits -= pendingTransactions[j].a;
+        }
+    }
+    for(var k = 0 ; k < miners[0].capturedTransactions.length ; k++){
+        if(miners[0].capturedTransactions[k].s == name){
+            credits -= miners[0].capturedTransactions[k].a;
+        }
+    }
+    return credits;
+}
+
 function modalCreate(){
     var modal = document.getElementById('popupVerify');
-    var btn = document.getElementById("myBtn");
+    //var btn = document.getElementById("myBtn");
 
     document.getElementById('appendcheck').onclick = function(){eval('miners[0].appendGuessandCheck();')};
 	document.getElementById('addreward').onclick = function(){eval('miners[0].addReward();')};
@@ -171,9 +196,9 @@ function modalCreate(){
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
+    //btn.onclick = function() {
+    //    modal.style.display = "block";
+    //}
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
@@ -229,6 +254,7 @@ function createBlock(fromTestButton, blockData){
         var nonce = randHex(nonceLength);
 		for(var i = 0 ; i < blockSize ; i++){
 			var t = genRandomTrans(true);
+            pendingTransactions.push(t);
 			transactions.push(t);
 			allTransactions.push(t);
 		}
@@ -242,6 +268,7 @@ function createBlock(fromTestButton, blockData){
     // Running reorganizeCanvDivs() to give new CanvasBlock initial position
     // Removed this since it was causing blinking effect and this function is run continually anyways
     // reorganizeCanvDivs();
+    pendingTransactions = [];
 	updateLedger();
     updateScroll();
 }
@@ -336,5 +363,16 @@ function resetAll(){
 function updateScroll(){
     var element = document.getElementById('cBlockchain');
     element.scrollTop = element.scrollHeight;
+}
+
+//
+function hasReward(block){
+	var reward = false;
+	for(var i = 0 ; i < block.transactions.length ; i++){
+		if(block.transactions[i].s == ''){
+			reward = true;
+		}
+	}
+	return reward;
 }
 

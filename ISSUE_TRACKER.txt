@@ -16,3 +16,12 @@ Each Block object should have a canvas block
 Miner should really "build" the block and then "broadcast" it.
 Right now, since I need there to be a global createBlock() function
 I will have the miner simply call that function
+
+Add 2 <br> to modal so that new lines from reward and nonce don't heighten the modal [Sovled for reward not nonce]
+Modal needs work
+
+Added hasReward(block) function which checks for a null sender.
+
+
+Bring up with discussion:
+	One of the interesting problems that I've faced is the intersection of OOP and blockchain.  Because of the nature of OOP, I've had to ask myself questions like: when is a block really a block?  When I reference block 8, what am I really referring to?  Whose job is it to broadcast transations, broadcast blocks, listen to blocks

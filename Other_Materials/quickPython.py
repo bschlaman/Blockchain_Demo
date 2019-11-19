@@ -9,7 +9,21 @@ def expect(n):
         total += probXgteN
     print(total)
 
-expect(5)
+#expect(5)
 # Birthday Problem
-expect(365)
-expect(3)
+#expect(365)
+#expect(3)
+
+####################################3
+import math
+
+reward = 200
+tot = 0
+def dep(r):
+    return math.floor(r * 0.9)
+print('Ver : reward')
+for x in range(0, 50):
+    print(str(x) + ' : ' + str(reward))
+    tot += reward
+    reward = dep(reward)
+print(tot)
