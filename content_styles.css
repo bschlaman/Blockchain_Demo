@@ -19,7 +19,6 @@ input {
 }
 canvas {
 	background-color: black;
-	height: 100%;
 }
 #cBlockchain{
 	/*position: relative;*/
