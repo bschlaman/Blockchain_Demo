@@ -22,6 +22,9 @@ Modal needs work
 
 Added hasReward(block) function which checks for a null sender.
 
+Make sender/receiver a dropdown menu and check amount for number
+Disallow negative balances
+
 
 Bring up with discussion:
 	One of the interesting problems that I've faced is the intersection of OOP and blockchain.  Because of the nature of OOP, I've had to ask myself questions like: when is a block really a block?  When I reference block 8, what am I really referring to?  Whose job is it to broadcast transations, broadcast blocks, listen to blocks
